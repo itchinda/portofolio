@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Multi-Output Non-Linear Regression – Ismaël Tchinda Ngueyong | Portfolio</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-221fb94c3ec07aa7e68c2d5abc4fc18e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Ismaël Tchinda Ngueyong | Portfolio</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../ai-ml/index.html"> 
+<span class="menu-text">Deep Learning &amp; AI</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../scientific-computing/index.html"> 
+<span class="menu-text">Scientific Computing</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../cv.html"> 
+<span class="menu-text">Resume</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ai-ml/multi_output_regression.html">Multi-Output Non-Linear Regression</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ai-ml/ml-engine.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ML Engine (NumPy)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ai-ml/blobs_classification.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Multiclass Classification with ml-engine-from-scratch</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ai-ml/moons_classification.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Binary Classification of Non-Linear Data (Moons)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ai-ml/multi_output_regression.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Multi-Output Non-Linear Regression</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ai-ml/optitherm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">OptiTherm (Digital Twin)</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#data-generation-and-initial-visualization" id="toc-data-generation-and-initial-visualization" class="nav-link active" data-scroll-target="#data-generation-and-initial-visualization">1. Data Generation and Initial Visualization</a></li>
+  <li><a href="#neural-network-architecture" id="toc-neural-network-architecture" class="nav-link" data-scroll-target="#neural-network-architecture">2. Neural Network Architecture</a></li>
+  <li><a href="#model-training" id="toc-model-training" class="nav-link" data-scroll-target="#model-training">3. Model Training</a></li>
+  <li><a href="#learning-curves-analysis" id="toc-learning-curves-analysis" class="nav-link" data-scroll-target="#learning-curves-analysis">4. Learning Curves Analysis</a></li>
+  <li><a href="#regression-curve-visualization" id="toc-regression-curve-visualization" class="nav-link" data-scroll-target="#regression-curve-visualization">5. Regression Curve Visualization</a></li>
+  <li><a href="#model-persistence-saving-and-loading" id="toc-model-persistence-saving-and-loading" class="nav-link" data-scroll-target="#model-persistence-saving-and-loading">6. Model Persistence: Saving and Loading</a>
+  <ul class="collapse">
+  <li><a href="#save-the-trained-model" id="toc-save-the-trained-model" class="nav-link" data-scroll-target="#save-the-trained-model">Save the Trained Model</a></li>
+  <li><a href="#load-the-trained-model" id="toc-load-the-trained-model" class="nav-link" data-scroll-target="#load-the-trained-model">Load the Trained Model</a></li>
+  </ul></li>
+  <li><a href="#conclusion-and-spectral-bias" id="toc-conclusion-and-spectral-bias" class="nav-link" data-scroll-target="#conclusion-and-spectral-bias">7. Conclusion and Spectral Bias</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Multi-Output Non-Linear Regression</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>This notebook demonstrates how to use the <code>ml-engine-from-scratch</code> framework to solve a complex, multi-output regression task.</p>
+<p>Unlike classification tasks where the output is a discrete label, regression requires the network to predict continuous values. We will task our Multi-Layer Perceptron (MLP) with simultaneously learning two distinct continuous functions from a single input <span class="math inline">\(x\)</span>: 1. A smooth, low-frequency sine wave. 2. A highly complex, multi-frequency wave.</p>
+<p>This serves as a practical demonstration of the <strong>Universal Approximation Theorem</strong>, showing how deep networks can map 1D inputs to multi-dimensional continuous spaces.</p>
+<div id="150ee4dd" class="cell" data-execution_count="46">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> ml_framework <span class="im">as</span> ml</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># General Configuration</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>N_SAMPLES <span class="op">=</span> <span class="dv">10000</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>N_IN_FEATURES <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>N_OUT_FEATURES <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>X_MIN <span class="op">=</span> <span class="op">-</span><span class="fl">1.0</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>X_MAX <span class="op">=</span> <span class="fl">1.0</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(seed<span class="op">=</span><span class="dv">42</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="data-generation-and-initial-visualization" class="level2">
+<h2 class="anchored" data-anchor-id="data-generation-and-initial-visualization">1. Data Generation and Initial Visualization</h2>
+<p>We will generate 10,000 random scalar inputs <span class="math inline">\(x \in [-1, 1]\)</span>. From these inputs, we generate two targets with added Gaussian noise: * <span class="math inline">\(y_1 = \sin(\pi x) + \epsilon\)</span> * <span class="math inline">\(y_2 = \sin(2x) + 0.5\cos(10x) + 0.25\sin(25x) + \epsilon\)</span></p>
+<p>Neural networks typically perform best when target variables are scaled. We will normalize both <span class="math inline">\(y_1\)</span> and <span class="math inline">\(y_2\)</span> to the <span class="math inline">\([0, 1]\)</span> range before splitting the dataset.</p>
+<div id="16490b09" class="cell" data-execution_count="47">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate inputs</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>x_data <span class="op">=</span> X_MIN <span class="op">+</span> (X_MAX <span class="op">-</span> X_MIN) <span class="op">*</span> rng.random((N_SAMPLES, N_IN_FEATURES))</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate targets with noise</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>noise <span class="op">=</span> rng.standard_normal((N_SAMPLES, <span class="dv">1</span>)) <span class="op">*</span> <span class="fl">0.1</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>y1 <span class="op">=</span> np.sin(np.pi <span class="op">*</span> x_data[:, <span class="dv">0</span>:<span class="dv">1</span>]) <span class="op">+</span> noise</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>y2 <span class="op">=</span> np.sin(<span class="dv">2</span> <span class="op">*</span> x_data[:, <span class="dv">0</span>:<span class="dv">1</span>]) <span class="op">+</span> <span class="fl">0.5</span> <span class="op">*</span> np.cos(<span class="dv">10</span> <span class="op">*</span> x_data[:, <span class="dv">0</span>:<span class="dv">1</span>]) <span class="op">+</span> <span class="fl">0.25</span> <span class="op">*</span> np.sin(<span class="dv">25</span> <span class="op">*</span> x_data[:, <span class="dv">0</span>:<span class="dv">1</span>]) <span class="op">+</span> noise</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>y_data <span class="op">=</span> np.hstack((y1, y2))</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Normalize Targets to [0, 1] using Min-Max scaling</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>y_data[:, <span class="dv">0</span>] <span class="op">=</span> (y_data[:, <span class="dv">0</span>] <span class="op">-</span> np.<span class="bu">min</span>(y_data[:, <span class="dv">0</span>])) <span class="op">/</span> (np.<span class="bu">max</span>(y_data[:, <span class="dv">0</span>]) <span class="op">-</span> np.<span class="bu">min</span>(y_data[:, <span class="dv">0</span>]))</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>y_data[:, <span class="dv">1</span>] <span class="op">=</span> (y_data[:, <span class="dv">1</span>] <span class="op">-</span> np.<span class="bu">min</span>(y_data[:, <span class="dv">1</span>])) <span class="op">/</span> (np.<span class="bu">max</span>(y_data[:, <span class="dv">1</span>]) <span class="op">-</span> np.<span class="bu">min</span>(y_data[:, <span class="dv">1</span>]))</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Initial Visualization of the Raw Data</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">5</span>))</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>plt.subplot(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Target 1: Smooth Sine Wave'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>plt.scatter(x_data, y_data[:, <span class="dv">0</span>], color<span class="op">=</span><span class="st">'blue'</span>, s<span class="op">=</span><span class="dv">2</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>plt.grid(alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>plt.subplot(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Target 2: High-Frequency Composite Wave'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>plt.scatter(x_data, y_data[:, <span class="dv">1</span>], color<span class="op">=</span><span class="st">'purple'</span>, s<span class="op">=</span><span class="dv">2</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>plt.grid(alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Train/Test Splitting (80/20)</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>split_idx <span class="op">=</span> <span class="bu">int</span>(N_SAMPLES <span class="op">*</span> <span class="fl">0.8</span>)</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>X_train, X_test <span class="op">=</span> x_data[:split_idx], x_data[split_idx:]</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>y_train, y_test <span class="op">=</span> y_data[:split_idx], y_data[split_idx:]</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Train shapes: X=</span><span class="sc">{</span>X_train<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">, y=</span><span class="sc">{</span>y_train<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Test shapes: X=</span><span class="sc">{</span>X_test<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">, y=</span><span class="sc">{</span>y_test<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="multi_output_regression_files/figure-html/cell-3-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Train shapes: X=(8000, 1), y=(8000, 2)
+Test shapes: X=(2000, 1), y=(2000, 2)</code></pre>
+</div>
+</div>
+</section>
+<section id="neural-network-architecture" class="level2">
+<h2 class="anchored" data-anchor-id="neural-network-architecture">2. Neural Network Architecture</h2>
+<p>Regression of highly non-linear, high-frequency functions requires sufficient depth and width.</p>
+<p><em>Engineering Note:</em> We are using the <strong>Hyperbolic Tangent (<code>Tanh</code>)</strong> activation function here instead of <code>ReLU</code>. <code>Tanh</code> provides smooth, differentiable, and bounded non-linearities <span class="math inline">\([-1, 1]\)</span>, which often yield much smoother curve approximations for continuous mathematical functions compared to the sharp “corners” created by <code>ReLU</code> networks.</p>
+<div id="7030945f" class="cell" data-execution_count="48">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Model Architecture</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> ml.Sequential([</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    ml.LinearLayer(in_features<span class="op">=</span><span class="dv">1</span>, out_features<span class="op">=</span><span class="dv">32</span>, rng<span class="op">=</span>rng),</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    ml.ActivationLayer(func<span class="op">=</span>ml.Tanh, derivative<span class="op">=</span>ml.TanhDerivative),</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    ml.LinearLayer(in_features<span class="op">=</span><span class="dv">32</span>, out_features<span class="op">=</span><span class="dv">32</span>, rng<span class="op">=</span>rng),</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    ml.ActivationLayer(func<span class="op">=</span>ml.Tanh, derivative<span class="op">=</span>ml.TanhDerivative),</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    ml.LinearLayer(in_features<span class="op">=</span><span class="dv">32</span>, out_features<span class="op">=</span><span class="dv">64</span>, rng<span class="op">=</span>rng),</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    ml.ActivationLayer(func<span class="op">=</span>ml.Tanh, derivative<span class="op">=</span>ml.TanhDerivative),</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    ml.LinearLayer(in_features<span class="op">=</span><span class="dv">64</span>, out_features<span class="op">=</span><span class="dv">2</span>, rng<span class="op">=</span>rng)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Model Architecture Initialized:"</span>)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co"># For regression, Mean Squared Error (MSE) is the standard loss metric</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>loss_fn <span class="op">=</span> ml.MSELoss()</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>optimizer <span class="op">=</span> ml.Adam(learning_rate<span class="op">=</span><span class="fl">0.001</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Model Architecture Initialized:
+Sequential(
+    (0): LinearLayer(in_features=1, out_features=32, bias=True)
+    (1): ActivationLayer(func=Tanh)
+    (2): LinearLayer(in_features=32, out_features=32, bias=True)
+    (3): ActivationLayer(func=Tanh)
+    (4): LinearLayer(in_features=32, out_features=64, bias=True)
+    (5): ActivationLayer(func=Tanh)
+    (6): LinearLayer(in_features=64, out_features=2, bias=True)
+)</code></pre>
+</div>
+</div>
+</section>
+<section id="model-training" class="level2">
+<h2 class="anchored" data-anchor-id="model-training">3. Model Training</h2>
+<p>We train the model for 1000 epochs. Because we are optimizing a continuous output, we track the Mean Squared Error (MSE). We shuffle the data at the start of every epoch to ensure stochasticity in our mini-batches.</p>
+<div id="b02b2f55" class="cell" data-execution_count="49">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>EPOCHS <span class="op">=</span><span class="dv">1000</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>TEST_FREQ <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>BATCH_SIZE <span class="op">=</span> <span class="dv">128</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>loss_values <span class="op">=</span> []</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>val_loss_values <span class="op">=</span> []</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> epoch <span class="kw">in</span> <span class="bu">range</span>(EPOCHS):</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    model.train()</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Shuffle training data</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    indices <span class="op">=</span> np.arange(X_train.shape[<span class="dv">0</span>])</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    rng.shuffle(indices)</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    X_train_shuffled <span class="op">=</span> X_train[indices]</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    y_train_shuffled <span class="op">=</span> y_train[indices]</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Mini-batch training</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> start_idx <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, X_train.shape[<span class="dv">0</span>], BATCH_SIZE):</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>        end_idx <span class="op">=</span> start_idx <span class="op">+</span> BATCH_SIZE</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>        X_batch <span class="op">=</span> X_train_shuffled[start_idx:end_idx]</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>        y_batch <span class="op">=</span> y_train_shuffled[start_idx:end_idx]</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Forward pass</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>        y_pred <span class="op">=</span> model(X_batch)</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Compute loss (caches y_pred and y_expected internally)</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>        loss_fn(y_predicted<span class="op">=</span>y_pred, y_expected<span class="op">=</span>y_batch)</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Get the initial gradient from the MSE loss function</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>        initial_gradient <span class="op">=</span> loss_fn.backward()</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Backpropagation</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>        model.backward(initial_gradient)</span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Update weights</span></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>        optimizer.step(model)</span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Evaluation</span></span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (epoch <span class="op">+</span> <span class="dv">1</span>) <span class="op">%</span> TEST_FREQ <span class="op">==</span> <span class="dv">0</span> <span class="kw">or</span> epoch <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>        model.<span class="bu">eval</span>()</span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>        train_pred <span class="op">=</span> model(X_train)</span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>        train_loss <span class="op">=</span> loss_fn(y_predicted<span class="op">=</span>train_pred, y_expected<span class="op">=</span>y_train)</span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>        loss_values.append(train_loss)</span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>        test_pred <span class="op">=</span> model(X_test)</span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>        test_loss <span class="op">=</span> loss_fn(y_predicted<span class="op">=</span>test_pred, y_expected<span class="op">=</span>y_test)</span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>        val_loss_values.append(test_loss)</span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Epoch </span><span class="sc">{</span>epoch <span class="op">+</span> <span class="dv">1</span><span class="sc">:4d}</span><span class="ss">/</span><span class="sc">{</span>EPOCHS<span class="sc">}</span><span class="ss"> | Train MSE: </span><span class="sc">{</span>train_loss<span class="sc">:.6f}</span><span class="ss"> | Val MSE: </span><span class="sc">{</span>test_loss<span class="sc">:.6f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Epoch    1/1000 | Train MSE: 0.012770 | Val MSE: 0.013132
+Epoch   10/1000 | Train MSE: 0.005595 | Val MSE: 0.005732
+Epoch   20/1000 | Train MSE: 0.004032 | Val MSE: 0.004147
+Epoch   30/1000 | Train MSE: 0.003308 | Val MSE: 0.003330
+Epoch   40/1000 | Train MSE: 0.002694 | Val MSE: 0.002740
+Epoch   50/1000 | Train MSE: 0.002399 | Val MSE: 0.002428
+Epoch   60/1000 | Train MSE: 0.002532 | Val MSE: 0.002549
+Epoch   70/1000 | Train MSE: 0.002183 | Val MSE: 0.002216
+Epoch   80/1000 | Train MSE: 0.002306 | Val MSE: 0.002348
+Epoch   90/1000 | Train MSE: 0.002217 | Val MSE: 0.002260
+Epoch  100/1000 | Train MSE: 0.002038 | Val MSE: 0.002071
+Epoch  110/1000 | Train MSE: 0.001725 | Val MSE: 0.001763
+Epoch  120/1000 | Train MSE: 0.001689 | Val MSE: 0.001721
+Epoch  130/1000 | Train MSE: 0.001787 | Val MSE: 0.001836
+Epoch  140/1000 | Train MSE: 0.001477 | Val MSE: 0.001545
+Epoch  150/1000 | Train MSE: 0.001592 | Val MSE: 0.001674
+Epoch  160/1000 | Train MSE: 0.001364 | Val MSE: 0.001430
+Epoch  170/1000 | Train MSE: 0.001342 | Val MSE: 0.001414
+Epoch  180/1000 | Train MSE: 0.001318 | Val MSE: 0.001368
+Epoch  190/1000 | Train MSE: 0.001267 | Val MSE: 0.001330
+Epoch  200/1000 | Train MSE: 0.001329 | Val MSE: 0.001404
+Epoch  210/1000 | Train MSE: 0.001270 | Val MSE: 0.001325
+Epoch  220/1000 | Train MSE: 0.001260 | Val MSE: 0.001303
+Epoch  230/1000 | Train MSE: 0.001285 | Val MSE: 0.001345
+Epoch  240/1000 | Train MSE: 0.001311 | Val MSE: 0.001368
+Epoch  250/1000 | Train MSE: 0.001240 | Val MSE: 0.001293
+Epoch  260/1000 | Train MSE: 0.001248 | Val MSE: 0.001269
+Epoch  270/1000 | Train MSE: 0.001282 | Val MSE: 0.001356
+Epoch  280/1000 | Train MSE: 0.001306 | Val MSE: 0.001347
+Epoch  290/1000 | Train MSE: 0.001228 | Val MSE: 0.001289
+Epoch  300/1000 | Train MSE: 0.001210 | Val MSE: 0.001260
+Epoch  310/1000 | Train MSE: 0.001223 | Val MSE: 0.001277
+Epoch  320/1000 | Train MSE: 0.001235 | Val MSE: 0.001305
+Epoch  330/1000 | Train MSE: 0.001170 | Val MSE: 0.001215
+Epoch  340/1000 | Train MSE: 0.001179 | Val MSE: 0.001224
+Epoch  350/1000 | Train MSE: 0.001195 | Val MSE: 0.001255
+Epoch  360/1000 | Train MSE: 0.001151 | Val MSE: 0.001193
+Epoch  370/1000 | Train MSE: 0.001174 | Val MSE: 0.001224
+Epoch  380/1000 | Train MSE: 0.001209 | Val MSE: 0.001256
+Epoch  390/1000 | Train MSE: 0.001178 | Val MSE: 0.001220
+Epoch  400/1000 | Train MSE: 0.001159 | Val MSE: 0.001203
+Epoch  410/1000 | Train MSE: 0.001139 | Val MSE: 0.001177
+Epoch  420/1000 | Train MSE: 0.001198 | Val MSE: 0.001233
+Epoch  430/1000 | Train MSE: 0.001284 | Val MSE: 0.001322
+Epoch  440/1000 | Train MSE: 0.001160 | Val MSE: 0.001199
+Epoch  450/1000 | Train MSE: 0.001256 | Val MSE: 0.001292
+Epoch  460/1000 | Train MSE: 0.001174 | Val MSE: 0.001218
+Epoch  470/1000 | Train MSE: 0.001122 | Val MSE: 0.001162
+Epoch  480/1000 | Train MSE: 0.001226 | Val MSE: 0.001264
+Epoch  490/1000 | Train MSE: 0.001235 | Val MSE: 0.001274
+Epoch  500/1000 | Train MSE: 0.001143 | Val MSE: 0.001186
+Epoch  510/1000 | Train MSE: 0.001158 | Val MSE: 0.001191
+Epoch  520/1000 | Train MSE: 0.001134 | Val MSE: 0.001174
+Epoch  530/1000 | Train MSE: 0.001161 | Val MSE: 0.001213
+Epoch  540/1000 | Train MSE: 0.001150 | Val MSE: 0.001204
+Epoch  550/1000 | Train MSE: 0.001196 | Val MSE: 0.001244
+Epoch  560/1000 | Train MSE: 0.001133 | Val MSE: 0.001183
+Epoch  570/1000 | Train MSE: 0.001146 | Val MSE: 0.001203
+Epoch  580/1000 | Train MSE: 0.001179 | Val MSE: 0.001236
+Epoch  590/1000 | Train MSE: 0.001166 | Val MSE: 0.001198
+Epoch  600/1000 | Train MSE: 0.001120 | Val MSE: 0.001179
+Epoch  610/1000 | Train MSE: 0.001111 | Val MSE: 0.001156
+Epoch  620/1000 | Train MSE: 0.001167 | Val MSE: 0.001218
+Epoch  630/1000 | Train MSE: 0.001151 | Val MSE: 0.001206
+Epoch  640/1000 | Train MSE: 0.001151 | Val MSE: 0.001202
+Epoch  650/1000 | Train MSE: 0.001187 | Val MSE: 0.001247
+Epoch  660/1000 | Train MSE: 0.001200 | Val MSE: 0.001274
+Epoch  670/1000 | Train MSE: 0.001170 | Val MSE: 0.001212
+Epoch  680/1000 | Train MSE: 0.001137 | Val MSE: 0.001188
+Epoch  690/1000 | Train MSE: 0.001189 | Val MSE: 0.001246
+Epoch  700/1000 | Train MSE: 0.001200 | Val MSE: 0.001263
+Epoch  710/1000 | Train MSE: 0.001186 | Val MSE: 0.001223
+Epoch  720/1000 | Train MSE: 0.001160 | Val MSE: 0.001201
+Epoch  730/1000 | Train MSE: 0.001138 | Val MSE: 0.001203
+Epoch  740/1000 | Train MSE: 0.001126 | Val MSE: 0.001177
+Epoch  750/1000 | Train MSE: 0.001182 | Val MSE: 0.001230
+Epoch  760/1000 | Train MSE: 0.001109 | Val MSE: 0.001162
+Epoch  770/1000 | Train MSE: 0.001114 | Val MSE: 0.001161
+Epoch  780/1000 | Train MSE: 0.001125 | Val MSE: 0.001178
+Epoch  790/1000 | Train MSE: 0.001213 | Val MSE: 0.001273
+Epoch  800/1000 | Train MSE: 0.001154 | Val MSE: 0.001194
+Epoch  810/1000 | Train MSE: 0.001180 | Val MSE: 0.001254
+Epoch  820/1000 | Train MSE: 0.001245 | Val MSE: 0.001299
+Epoch  830/1000 | Train MSE: 0.001194 | Val MSE: 0.001238
+Epoch  840/1000 | Train MSE: 0.001122 | Val MSE: 0.001182
+Epoch  850/1000 | Train MSE: 0.001191 | Val MSE: 0.001240
+Epoch  860/1000 | Train MSE: 0.001170 | Val MSE: 0.001229
+Epoch  870/1000 | Train MSE: 0.001115 | Val MSE: 0.001162
+Epoch  880/1000 | Train MSE: 0.001174 | Val MSE: 0.001234
+Epoch  890/1000 | Train MSE: 0.001161 | Val MSE: 0.001207
+Epoch  900/1000 | Train MSE: 0.001156 | Val MSE: 0.001206
+Epoch  910/1000 | Train MSE: 0.001167 | Val MSE: 0.001222
+Epoch  920/1000 | Train MSE: 0.001112 | Val MSE: 0.001167
+Epoch  930/1000 | Train MSE: 0.001116 | Val MSE: 0.001157
+Epoch  940/1000 | Train MSE: 0.001135 | Val MSE: 0.001191
+Epoch  950/1000 | Train MSE: 0.001219 | Val MSE: 0.001287
+Epoch  960/1000 | Train MSE: 0.001150 | Val MSE: 0.001195
+Epoch  970/1000 | Train MSE: 0.001174 | Val MSE: 0.001206
+Epoch  980/1000 | Train MSE: 0.001158 | Val MSE: 0.001211
+Epoch  990/1000 | Train MSE: 0.001167 | Val MSE: 0.001230
+Epoch 1000/1000 | Train MSE: 0.001184 | Val MSE: 0.001221</code></pre>
+</div>
+</div>
+</section>
+<section id="learning-curves-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="learning-curves-analysis">4. Learning Curves Analysis</h2>
+<p>Because MSE can drop rapidly in the first few epochs and then decrease exponentially slowly, it is often best visualized on a logarithmic scale (<code>semilogy</code>). This allows us to observe the fine-tuning behavior in the later epochs.</p>
+<div id="40cc1113" class="cell" data-execution_count="50">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Training and Validation Loss (MSE)'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>plt.semilogy(TEST_FREQ<span class="op">*</span>np.arange(<span class="bu">len</span>(loss_values)), loss_values, <span class="st">'b-'</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>, label<span class="op">=</span><span class="st">'Train Loss'</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>plt.semilogy(TEST_FREQ<span class="op">*</span>np.arange(<span class="bu">len</span>(loss_values)), val_loss_values, <span class="st">'g-'</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>, label<span class="op">=</span><span class="st">'Validation Loss'</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Epochs'</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Mean Squared Error (Log Scale)'</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>, which<span class="op">=</span><span class="st">"both"</span>, ls<span class="op">=</span><span class="st">"-"</span>, alpha<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="multi_output_regression_files/figure-html/cell-6-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="regression-curve-visualization" class="level2">
+<h2 class="anchored" data-anchor-id="regression-curve-visualization">5. Regression Curve Visualization</h2>
+<p>To evaluate our model visually, we will generate a perfectly spaced array of points across our input domain and ask the model to predict the outputs. We can then overlay this predicted curve on top of our noisy training and testing data.</p>
+<div id="ed01964c" class="cell" data-execution_count="51">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate continuous inputs for a smooth evaluation curve</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>model.<span class="bu">eval</span>()</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>X_eval <span class="op">=</span> np.linspace(X_MIN, X_MAX, <span class="dv">500</span>).reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>y_pred_eval <span class="op">=</span> model(X_eval)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot Output 1</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">5</span>))</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Output 1: Smooth Sine Wave Approximation'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>plt.scatter(X_train[:, <span class="dv">0</span>], y_train[:, <span class="dv">0</span>], color<span class="op">=</span><span class="st">'blue'</span>, s<span class="op">=</span><span class="dv">10</span>, label<span class="op">=</span><span class="st">'Train Data'</span>, alpha<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>plt.scatter(X_test[:, <span class="dv">0</span>], y_test[:, <span class="dv">0</span>], color<span class="op">=</span><span class="st">'green'</span>, s<span class="op">=</span><span class="dv">10</span>, label<span class="op">=</span><span class="st">'Test Data'</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>plt.plot(X_eval[:, <span class="dv">0</span>], y_pred_eval[:, <span class="dv">0</span>], <span class="st">'r-'</span>, linewidth<span class="op">=</span><span class="dv">3</span>, label<span class="op">=</span><span class="st">'Model Prediction'</span>)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot Output 2</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">5</span>))</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Output 2: High-Frequency Composite Wave Approximation'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>plt.scatter(X_train[:, <span class="dv">0</span>], y_train[:, <span class="dv">1</span>], color<span class="op">=</span><span class="st">'blue'</span>, s<span class="op">=</span><span class="dv">10</span>, label<span class="op">=</span><span class="st">'Train Data'</span>, alpha<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>plt.scatter(X_test[:, <span class="dv">0</span>], y_test[:, <span class="dv">1</span>], color<span class="op">=</span><span class="st">'green'</span>, s<span class="op">=</span><span class="dv">10</span>, label<span class="op">=</span><span class="st">'Test Data'</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>plt.plot(X_eval[:, <span class="dv">0</span>], y_pred_eval[:, <span class="dv">1</span>], <span class="st">'r-'</span>, linewidth<span class="op">=</span><span class="dv">3</span>, label<span class="op">=</span><span class="st">'Model Prediction'</span>)</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="multi_output_regression_files/figure-html/cell-7-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="multi_output_regression_files/figure-html/cell-7-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="model-persistence-saving-and-loading" class="level2">
+<h2 class="anchored" data-anchor-id="model-persistence-saving-and-loading">6. Model Persistence: Saving and Loading</h2>
+<p>Training a complex model takes time and compute resources. A professional framework must be able to serialize (save) the learned weights to disk and deserialize (load) them later for inference without retraining.</p>
+<p>We will save our trained model, instantiate a completely fresh, untrained architecture, and load the saved weights. Finally, we will plot the predictions of both models to verify they match perfectly.</p>
+<section id="save-the-trained-model" class="level3">
+<h3 class="anchored" data-anchor-id="save-the-trained-model">Save the Trained Model</h3>
+<div id="f6a05544" class="cell" data-execution_count="52">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the trained model</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>save_path <span class="op">=</span> <span class="st">"regression_model.pth"</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>model.save(filepath<span class="op">=</span>save_path)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Model successfully saved to </span><span class="sc">{</span>save_path<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Model saved successfully to regression_model.pth
+Model successfully saved to regression_model.pth</code></pre>
+</div>
+</div>
+</section>
+<section id="load-the-trained-model" class="level3">
+<h3 class="anchored" data-anchor-id="load-the-trained-model">Load the Trained Model</h3>
+<div id="47af9437" class="cell" data-execution_count="53">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Instantiate a fresh, untrained model with the same architecture</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>loaded_model <span class="op">=</span> ml.Sequential([</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    ml.LinearLayer(in_features<span class="op">=</span><span class="dv">1</span>, out_features<span class="op">=</span><span class="dv">32</span>, rng<span class="op">=</span>rng),</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    ml.ActivationLayer(func<span class="op">=</span>ml.Tanh, derivative<span class="op">=</span>ml.TanhDerivative),</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    ml.LinearLayer(in_features<span class="op">=</span><span class="dv">32</span>, out_features<span class="op">=</span><span class="dv">32</span>, rng<span class="op">=</span>rng),</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    ml.ActivationLayer(func<span class="op">=</span>ml.Tanh, derivative<span class="op">=</span>ml.TanhDerivative),</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    ml.LinearLayer(in_features<span class="op">=</span><span class="dv">32</span>, out_features<span class="op">=</span><span class="dv">64</span>, rng<span class="op">=</span>rng),</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    ml.ActivationLayer(func<span class="op">=</span>ml.Tanh, derivative<span class="op">=</span>ml.TanhDerivative),</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    ml.LinearLayer(in_features<span class="op">=</span><span class="dv">64</span>, out_features<span class="op">=</span><span class="dv">2</span>, rng<span class="op">=</span>rng)</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the trained weights into the fresh model</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>loaded_model.load(filepath<span class="op">=</span>save_path)</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Model weights successfully loaded!"</span>)</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate predictions using the loaded model</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>loaded_model.<span class="bu">eval</span>()</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>y_pred_loaded <span class="op">=</span> loaded_model(X_eval)</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Visual verification</span></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">5</span>))</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Persistence Verification: Original vs. Loaded Model (Output 2)'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the original prediction as a thick, semi-transparent line</span></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>plt.plot(X_eval[:, <span class="dv">0</span>], y_pred_eval[:, <span class="dv">1</span>], color<span class="op">=</span><span class="st">'red'</span>, linewidth<span class="op">=</span><span class="dv">6</span>, alpha<span class="op">=</span><span class="fl">0.4</span>, label<span class="op">=</span><span class="st">"Original Model"</span>)</span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the loaded prediction as a thin dashed line over it</span></span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>plt.plot(X_eval[:, <span class="dv">0</span>], y_pred_loaded[:, <span class="dv">1</span>], color<span class="op">=</span><span class="st">'black'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">"Loaded Model"</span>)</span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Model loaded successfully from regression_model.pth
+Model weights successfully loaded!</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="multi_output_regression_files/figure-html/cell-9-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="conclusion-and-spectral-bias" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion-and-spectral-bias">7. Conclusion and Spectral Bias</h2>
+<p>The <code>ml-engine-from-scratch</code> framework successfully learned to approximate a multi-dimensional function mapping.</p>
+<p><strong>Architectural Insight (Spectral Bias):</strong> You may notice that the model approximates the smooth, low-frequency sine wave (Output 1) almost perfectly and very early in training. However, the high-frequency composite wave (Output 2) takes significantly more epochs to capture, and the peaks may be slightly smoothed out.</p>
+<p>This demonstrates a known phenomenon in Deep Learning called <strong>Spectral Bias</strong>: Neural networks naturally learn low-frequency functions easily and struggle to learn high-frequency variations. Solving this for complex physical simulations often requires techniques like <em>Fourier Features</em> or <em>Positional Encodings</em> (similar to those used in Transformers).</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/itchinda\.github\.io\/portofolio\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
