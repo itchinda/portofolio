@@ -1,0 +1,74 @@
+---
+title: "Curriculum Vitae"
+description: "Ph.D. in Applied Mathematics | AI & Scientific Computing Developer"
+format:
+  html:
+    toc: false
+    css: styles.css
+---
+
+<div class="text-center" style="text-align: center; margin-bottom: 2rem;">
+  <h2>Ismaël Tchinda Ngueyong, Ph.D.</h2>
+  <p><strong>Applied Mathematician | AI & Scientific Computing Developer</strong></p>
+  <p>
+    Québec, QC, Canada
+  </p>
+  <p>
+    <a href="https://https://scholar.google.com/citations?user=0BtIIxcAAAAJ" target="_blank"><strong>Google Scholar Publications</strong></a> | 
+    <a href="https://github.com/itchinda" target="_blank"><strong>GitHub Portfolio</strong></a>
+  </p>
+</div>
+
+## Professional Summary
+
+Ph.D. in Applied Mathematics with extensive expertise in mathematical modeling, numerical analysis, high-performance scientific computing, and machine learning. Proven track record in designing advanced computational solvers and open-source libraries ([`PyOdys`](https://github.com/itchinda/pyodys-project) and [`CFEM++`](https://github.com/itchinda/cfempp)) in Python and C++. Adept at bridging complex theoretical frameworks with scalable data-driven solutions, deep learning applications, and numerical optimization for scientific and industrial problems.
+
+## Education
+
+* **Ph.D. in Applied Mathematics** | Université Laval, Canada (2019 – 2024)
+  * *Focus:* Numerical Analysis, Finite Element Methods (CutFEM), Multiphysics Modeling.
+* **Master 1 in Mechanics (Mathematical Methods for Mechanics)** | Université Paris-Saclay, France (2017 – 2018)
+* **Master of Science (M.Sc.) in Mathematics** | AIMS Senegal (2016 – 2017)
+* **Bachelor of Science & Master 1 in Physics** | University of Douala, Cameroon (2011 – 2015)
+
+## Technical Skills & Expertise
+
+* **Programming & Libraries:** Python (NumPy, PyTorch, SciPy, Pandas), C/C++ (High-Performance Computing), MATLAB, Git, Linux/Unix environments.
+* **AI, Data Science & Machine Learning:** Deep Neural Networks, Recurrent Neural Networks (LSTM/GRU), Time-Series Forecasting, Model Predictive Control (MPC), Numerical Optimization (L-BFGS-B).
+* **Scientific Computing & Numerical Methods:** Partial Differential Equations (PDEs), Ordinary Differential Equations (ODEs), Finite Element Methods (FEM, CutFEM), Computational Fluid Dynamics (CFD).
+* **Languages:** French (Native/Bilingual), English (Professional Proficiency).
+
+## Research, R&D & Software Engineering Experience
+
+* **Postdoctoral Researcher (Multiphysics R&D)** | GIREF, Université Laval (2024 – 2025)
+  * Researched advanced mathematical modeling and numerical simulation for complex multiphysics fluid flows (coextrusion processes).
+  * Authored scientific research papers detailing high-accuracy numerical algorithms.
+* **Lead Developer** | [`CFEM++`](https://github.com/itchinda/cfempp) C++ Scientific Computing Library (Ongoing)
+  * Architecting a high-performance C++ finite element framework tailored for moving interface problems and complex fluid simulations.
+  * Optimized core numerical solvers and data structures for maximum computational efficiency.
+* **Creator & Maintainer** | [`PyOdys`](https://github.com/itchinda/pyodys-project) Open-Source Python Package (2024 – Present)
+  * Designed and released a modular Python solver package for Ordinary Differential Equations (ODEs) utilizing advanced Runge-Kutta and linear multistep integration schemes.
+* **Ph.D. Research Developer** | GIREF, Université Laval (2019 – 2024)
+  * Developed and integrated custom C++ finite element solvers (CutFEM) within the [`MEF++`](https://fr.wikipedia.org/wiki/MEF%2B%2B) simulation software environment for phase-change phenomena.
+  * Validated complex numerical models, resulting in multiple publications in peer-reviewed international scientific journals.
+
+## Teaching & Academic Leadership
+
+* **Mathematics Instructor** | Cégep de La Pocatière (Jan 2026 – Present)
+  * Instructing courses in Linear Algebra and Vector Geometry, integrating modern computational tooling and active-learning strategies.
+* **Co-Supervisor of Master’s Student** | Department of Mathematics and Statistics, Université Laval (2025)
+  * Provided scientific and methodological oversight for graduate research applying numerical methods to differential equations.
+* **Teaching Assistant & Lab Instructor (C++ Programming & Numerical Methods)** | Université Laval (2020 – 2024)
+  * Led laboratory sessions for *Numerical Methods (MAT-2400)*, teaching iterative algorithms, floating-point arithmetic, and scientific computing scripts.
+  * Supervised and graded advanced C++ programming sessions, debugging pipelines, and algorithmic implementations.
+
+## Honors & Excellence Scholarships
+
+* **Giref Doctoral Research Scholarship** ($27,000 / year) | Université Laval (2019 – 2024)
+* **International Master’s Scholarship** (€10,000) | Université Paris-Saclay (2017 – 2018)
+* **African Institute for Mathematical Sciences (AIMS) Fellowship** ($10,000) | AIMS Senegal (2016 – 2017)
+
+## Professional Affiliations
+
+* Society for Industrial and Applied Mathematics (SIAM)
+* Canadian Association for Applied and Industrial Mathematics (CAIMS)

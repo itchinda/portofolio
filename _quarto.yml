@@ -1,0 +1,46 @@
+project:
+  type: website
+
+website:
+  title: "Ismaël Tchinda Ngueyong | Portfolio"
+  description: "Scientific Computing Developer"
+  
+  navbar:
+    background: primary
+    left:
+      - href: index.qmd
+        text: Home
+      - text: Deep Learning & AI
+        href: ai-ml/index.qmd
+      - text: Scientific Computing
+        href: scientific-computing/index.qmd
+      - href: cv.qmd
+        text: Resume
+
+  sidebar:
+    - id: ai-ml
+      title: "Deep Learning & AI"
+      contents:
+        - text: "ML Engine (NumPy)"
+          href: ai-ml/ml-engine.qmd
+        - ai-ml/blobs_classification.ipynb
+        - ai-ml/moons_classification.ipynb
+        - ai-ml/multi_output_regression.ipynb
+        - text: "OptiTherm (Digital Twin)"
+          href: ai-ml/optitherm.qmd
+
+    - id: scientific-computing
+      title: "Scientific Computing"
+      contents:
+        - text: "CFEM++ (C++)"
+          href: scientific-computing/cfem.qmd
+        - text: "PyOdys (Python)"
+          href: scientific-computing/pyodys.qmd
+
+format:
+  html:
+    theme:
+      light: [flatly, theme-light.scss]
+      dark: [darkly, theme-dark.scss]
+    css: styles.css
+    toc: true

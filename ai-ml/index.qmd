@@ -1,0 +1,36 @@
+---
+title: "Deep Learning & AI"
+description: "From foundational mathematics to data-driven physical systems."
+---
+
+My approach to Artificial Intelligence is deeply rooted in my background in applied mathematics. Rather than treating neural networks as black boxes, I focus on the underlying calculus, linear algebra, and optimization theory that drive them. 
+
+My projects range from building the mathematical foundations of deep learning algorithms from scratch to applying advanced time-series models to complex physical systems.
+
+---
+
+::: {.grid}
+
+::: {.g-col-12 .g-col-md-6}
+### [ML Engine From Scratch](ml-engine.qmd)
+**Language:** `Python`, `NumPy` | **Domain:** `Deep Learning Architecture`
+
+To fully master the mathematics of automatic differentiation and backpropagation, I engineered a complete Deep Learning framework from scratch using only NumPy. 
+
+It features an object-oriented API (similar to PyTorch), custom layers, stable cross-entropy loss functions, and a fully functional Adam optimizer. The project includes interactive Jupyter Notebooks proving the engine's capability on both non-linear classification and multi-output continuous regression.
+
+[Explore the Framework &rarr;](ml-engine.qmd)
+:::
+
+::: {.g-col-12 .g-col-md-6}
+### [OptiTherm: Digital Twin](optitherm.qmd)
+**Language:** `PyTorch` | **Domain:** `Time-Series, Model Predictive Control`
+
+A data-driven approach to modeling building thermal dynamics.
+
+Instead of relying solely on rigid physical equations, this project uses Long Short-Term Memory (LSTM) neural networks to learn the thermal inertia and behavior of buildings directly from sensor data. The AI model is then integrated into a Model Predictive Control (MPC) framework to optimize HVAC commands for maximum energy efficiency and comfort.
+
+[View the OptiTherm Project &rarr;](optitherm.qmd)
+:::
+
+:::

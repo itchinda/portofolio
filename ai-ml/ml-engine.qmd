@@ -1,0 +1,29 @@
+---
+title: "ML Engine From Scratch"
+description: "A custom Deep Learning framework built entirely from scratch using NumPy."
+---
+
+## Overview
+
+Modern frameworks like PyTorch and TensorFlow abstract away the complex calculus and linear algebra required to train neural networks. To deeply understand the mathematics of backpropagation and optimization, I built a custom Deep Learning framework completely from scratch using only Python and `numpy`.
+
+This engine supports dynamic graph execution (the "bucket brigade" automatic differentiation), custom activation layers, and various loss functions.
+
+## Core Architecture
+
+The framework is built using a strict Object-Oriented paradigm, ensuring modularity and mathematical rigor:
+
+*   **`Layer` Base Class:** Defines the `forward` and `backward` interfaces.
+*   **`LinearLayer`:** Implements affine transformations ($y = Wx + b$) and calculates parameter gradients.
+*   **`ActivationLayer`:** Injects non-linearities (ReLU, Sigmoid, Tanh) and their explicit derivatives to prevent mathematical collapse of the network.
+*   **`Loss Functions`:** Implements `MSELoss`, `BinaryCrossEntropyLoss`, and `CrossEntropyLoss` (with numerically stable internal Softmax).
+*   **`Optimizers`:** Includes standard SGD and a custom implementation of the `Adam` optimizer with momentum and RMSprop mechanics.
+*   **`Sequential` API:** A user-friendly wrapper to stack layers and manage the training loop cleanly.
+
+## Live Examples
+
+I have prepared three comprehensive Jupyter Notebooks demonstrating the framework's capabilities on various mathematical topologies:
+
+1. [**Multiclass Classification (Blobs)**](blobs_classification.ipynb): Demonstrating linear separability and the mathematical equivalence of stacked linear layers without activations.
+2. [**Non-Linear Classification (Moons)**](moons_classification.ipynb): Proving the necessity of ReLU activations to warp decision boundaries in non-linear data.
+3. [**Multi-Output Regression**](multi_output_regression.ipynb): Demonstrating the Universal Approximation Theorem and the effects of Spectral Bias on high-frequency signals.

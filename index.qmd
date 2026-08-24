@@ -1,0 +1,43 @@
+---
+title: "Ismaël Tchinda Ngueyong, Ph.D."
+description: "Applied Mathematician & Scientific Computing Developer"
+about:
+  template: solana
+  links:
+    - icon: github
+      text: GitHub
+      href: https://github.com/itchinda
+    - icon: mortarboard-fill
+      text: Google Scholar
+      href: https://scholar.google.com/citations?user=0BtIIxcAAAAJ
+---
+
+## Welcome to My Portfolio
+
+Hello! I am an applied mathematician and researcher specializing in **scientific computing, numerical analysis, and machine learning**. My work focuses on bridging rigorous mathematical modeling with high-performance software architecture to solve complex multiphysics and data-driven problems.
+
+I hold a Ph.D. in Applied Mathematics from Université Laval and have extensive experience developing robust simulation environments, numerical solvers, and machine learning pipelines.
+
+---
+
+## Featured Projects
+
+Here is a glimpse of the projects and tools featured in this portfolio:
+
+*   **[Deep Learning & AI](./ai-ml/index.qmd):** 
+    *   **OptiTherm (Digital Twin):** A data-driven Model Predictive Control (MPC) framework built with PyTorch for optimizing building energy efficiency using the BDG2 dataset.
+    *   **Custom ML Engine:** Neural network architectures and classification frameworks built from scratch using NumPy and PyTorch.
+
+*   **[Scientific Computing & C++](./scientific-computing/index.qmd):**
+    *   **CFEM++:** A high-performance C++ scientific computing library for multiphysics simulations and Cut Finite Element Methods (CutFEM).
+    *   **PyOdys:** An open-source Python package designed for solving ordinary differential equations using advanced Runge-Kutta and multistep integration schemes.
+
+---
+
+## Background & Expertise
+
+*   **Mathematical Modeling:** Partial Differential Equations (PDEs), Ordinary Differential Equations (ODEs), Finite Element Methods (FEM/CutFEM), and Numerical Optimization.
+*   **Programming & Technologies:** Python (`PyTorch`, `NumPy`, `SciPy`), C/C++ (`PETSc`, `Eigen`), `Git`, and `Linux`.
+*   **Academic & R&D Experience:** Postdoctoral research at GIREF (Université Laval) and teaching roles within the college network.
+
+Feel free to browse my [Resume](./cv.qmd) or check out the navigation menu above to explore my projects in detail!

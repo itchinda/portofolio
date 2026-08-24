@@ -1,0 +1,36 @@
+---
+title: "Scientific Computing"
+description: "Bridging the gap between theoretical mathematics and high-performance software engineering."
+---
+
+My work in scientific computing focuses on translating complex mathematical models into efficient, scalable, and robust software. This involves a deep understanding of numerical analysis, partial and ordinary differential equations, and the architectural design required for high-performance execution.
+
+Below are my flagship projects in this domain, spanning both low-level C++ for intensive multiphysics simulations and Python for accessible, open-source scientific tooling.
+
+---
+
+::: {.grid}
+
+::: {.g-col-12 .g-col-md-6}
+### [CFEM++: Multiphysics Simulation](cfem.qmd)
+**Language:** `C++` | **Domain:** `PDEs, Finite Elements`
+
+A high-performance scientific computing library dedicated to advanced finite element methods. 
+
+CFEM++ focuses heavily on **Cut Finite Element Methods (CutFEM)** to handle dynamic interfaces, phase changes, and non-Newtonian fluid flows without the immense computational cost of continuous mesh regeneration. It integrates seamlessly with industry-standard HPC linear algebra backends like PETSc, MUMPS, and HYPRE.
+
+[Explore the Architecture &rarr;](cfem.qmd)
+:::
+
+::: {.g-col-12 .g-col-md-6}
+### [PyOdys: Numerical ODE Solvers](pyodys.qmd)
+**Language:** `Python` | **Domain:** `ODEs, Open Source`
+
+An open-source Python package actively distributed on PyPI for solving Ordinary Differential Equations. 
+
+PyOdys is designed to handle both standard and highly stiff systems. It features a unified solver interface supporting Explicit Runge-Kutta, DIRK, SDIRK, and multistep methods, with adaptive time-stepping and native support for time-dependent mass matrices and sparse Jacobians.
+
+[Read the Documentation &rarr;](pyodys.qmd)
+:::
+
+:::

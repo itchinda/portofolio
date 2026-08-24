@@ -1,0 +1,113 @@
+/*-- scss:defaults --*/
+
+// Couleurs extraites de l'image
+$primary: #2276a9; // Le bleu du bouton "Voir le journal de bord"
+$link-color: #5ba6d6; // Un bleu un peu plus clair pour garantir la lisibilité des liens sur fond noir
+
+// Typographie (sans-serif moderne pour correspondre à l'image)
+$font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$font-family-monospace: "JetBrains Mono", Consolas, monospace;
+$headings-font-family: $font-family-sans-serif;
+$headings-font-weight: 700;
+
+// Fond et texte
+$body-bg: #222224;
+$body-color: #d1d5db;
+$headings-color: #d1d5db;
+
+// Code
+$code-bg: #18181a;
+$code-color: #cbd6e2;
+
+/*-- scss:rules --*/
+
+// Navbar (assombrie pour imiter la partie supérieure de l'image)
+.navbar {
+  background-color: #1a1a1c !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+.navbar-title {
+  font-weight: 700;
+  color: $headings-color !important;
+}
+
+// Titres
+h1, h2, h3, h4, h5, h6 {
+  color: $headings-color;
+}
+h2 {
+  margin-top: 2.2em;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+// Quarto's CV/title-block banner
+.quarto-title-banner,
+.quarto-title-banner h1,
+.quarto-title .title,
+.quarto-title .subtitle,
+.quarto-title-meta {
+  color: $headings-color !important;
+}
+.quarto-title-banner .description,
+.quarto-title-meta-heading {
+  color: $body-color !important;
+}
+
+// Liens
+a {
+  text-decoration: none;
+  color: $link-color;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+.btn, .btn-primary {
+  background-color: $primary !important;
+  border-color: $primary !important;
+  color: #ffffff !important;
+  border-radius: 4px; /* Coins légèrement arrondis comme sur l'image */
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+}
+.btn-primary:hover {
+  background-color: lighten(#2276a9, 10%) !important;
+  border-color: lighten(#2276a9, 10%) !important;
+}
+
+// Blocs de code
+pre, code {
+  border-radius: 6px;
+}
+pre {
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+// Sidebar
+.sidebar-item-text {
+  font-size: 0.95rem;
+}
+.sidebar-item.active > .sidebar-item-container > .sidebar-item-text {
+  font-weight: 600;
+  color: $primary;
+}
+
+// Cartes / listings
+.card, .quarto-grid-item {
+  border-radius: 8px;
+  background-color: #2a2a2c; /* Un peu plus clair que le fond pour détacher les éléments */
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+.card:hover, .quarto-grid-item:hover {
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+  transform: translateY(-2px);
+}
+
+// Footer
+.nav-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  font-size: 0.85rem;
+  color: #888;
+}

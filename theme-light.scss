@@ -1,0 +1,98 @@
+/*-- scss:defaults --*/
+
+// Couleurs d'origine adaptées au mode clair
+$primary: #3a6ea5;
+$link-color: $primary;
+
+// Typographie (synchronisée avec le mode sombre pour une transition parfaite)
+$font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$font-family-monospace: "JetBrains Mono", Consolas, monospace;
+$headings-font-family: $font-family-sans-serif;
+$headings-font-weight: 700;
+
+$body-bg: #ffffff;
+$body-color: #2b2b2b;
+
+// Headings color
+$headings-color: #16202b;
+
+// Code
+$code-bg: #f6f8fa;
+$code-color: #2c3e50;
+
+/*-- scss:rules --*/
+
+// Navbar
+.navbar {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+.navbar-title {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+// Headings
+h1, h2, h3, h4, h5, h6 {
+  letter-spacing: -0.01em;
+  color: $headings-color;
+}
+h2 {
+  margin-top: 2.2em;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+// Quarto's CV/title-block banner
+.quarto-title-banner,
+.quarto-title-banner h1,
+.quarto-title .title,
+.quarto-title .subtitle,
+.quarto-title-meta {
+  color: $headings-color !important;
+}
+.quarto-title-banner .description,
+.quarto-title-meta-heading {
+  color: $body-color !important;
+}
+
+// Links: subtle underline on hover instead of always-on
+a {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+// Code blocks
+pre, code {
+  border-radius: 6px;
+}
+pre {
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+// Sidebar
+.sidebar-item-text {
+  font-size: 0.95rem;
+}
+.sidebar-item.active > .sidebar-item-container > .sidebar-item-text {
+  font-weight: 600;
+  color: $primary;
+}
+
+// Cards / listings
+.card, .quarto-grid-item {
+  border-radius: 8px;
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+.card:hover, .quarto-grid-item:hover {
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+// Footer
+.nav-footer {
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  font-size: 0.85rem;
+  color: #6b6b6b;
+}

@@ -1,0 +1,12 @@
+/.quarto/
+**/*.quarto_ipynb
+/_site/
+/.venv/
+__pycache__/
+*.pyc
+.DS_Store
+*.csv
+/ai-ml/archive/
+*.html
+*_files/
+site_libs/
