@@ -77,14 +77,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-5fd49111c67786fa9da7eec5f8b0b01d.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-9f5b926861a4788c0ac337eeae9eab8a.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-5fd49111c67786fa9da7eec5f8b0b01d.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-6f4c31e05982fe9d7c1d5110dfef5365.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-1dd26af7942a9f2a0e9e560fe99add0c.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-6f4c31e05982fe9d7c1d5110dfef5365.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-15edbce69538c647d35688472b53b0b8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-e3d4a8a8b52053fb18459f3b50eeff28.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-15edbce69538c647d35688472b53b0b8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-2a31efa005db86361c520dbf8ed23528.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-93b991b7292ee0c8efb8e530910a6f63.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-2a31efa005db86361c520dbf8ed23528.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -463,7 +463,7 @@ window.Quarto = {
 <section id="why-this-building" class="level4">
 <h4 class="anchored" data-anchor-id="why-this-building">Why this building?</h4>
 <p>Office buildings exhibit well-defined daily and weekly occupancy patterns, with low occupancy during nights and weekends. In addition, a building constructed in 1974 is likely to have significant thermal inertia and relatively poor insulation compared with modern standards. These characteristics make it an ideal candidate for a predictive AI-based control system, as substantial energy savings can be achieved by anticipating heating and cooling demands while maintaining occupant comfort.</p>
-<div id="32394d1f" class="cell" data-execution_count="1">
+<div id="f310b35c" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the building metadata</span></span>
@@ -538,7 +538,7 @@ Name: count, dtype: int64
 </section>
 <section id="stage-1-data-engineering-and-consolidation-1" class="level2">
 <h2 class="anchored" data-anchor-id="stage-1-data-engineering-and-consolidation-1">Stage 1: Data Engineering and Consolidation</h2>
-<div id="2670691a" class="cell" data-execution_count="2">
+<div id="9593d9f4" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Parameters for the digital twin</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>building_id <span class="op">=</span> <span class="st">"Panther_office_Graham"</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>site_id <span class="op">=</span> <span class="st">"Panther"</span></span>
@@ -603,7 +603,7 @@ dtype: int64</code></pre>
 <section id="next-step" class="level4">
 <h4 class="anchored" data-anchor-id="next-step">Next Step</h4>
 <p>Before deciding whether to impute or discard these observations, a visual temporal analysis is required to identify the distribution and duration of the electricity meter outages.</p>
-<div id="90e7880e" class="cell" data-execution_count="3">
+<div id="fb8bb207" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"1. Cleaning exogenous variables (weather data)..."</span>)</span>
@@ -659,7 +659,7 @@ dtype: int64
 <p>Interestingly, the prolonged sensor outage observed during the summer of 2017 was retained and used as a natural temporal boundary between the training and testing datasets. This approach avoids arbitrary data splitting strategies and ensures a realistic evaluation scenario, where the model is trained on past observations and tested on future unseen conditions.</p>
 <p><strong>Methodological justification:</strong></p>
 <p>The thermal dynamics of a building are learned from temporal sequences using recurrent neural networks (RNN/LSTM) with sliding windows. Therefore, preserving the chronological structure of the data is essential. By using the sensor outage as a natural separation point, the model evaluation better reflects a real-world deployment scenario, where future energy consumption must be predicted based solely on historical information.</p>
-<div id="d8761141" class="cell" data-execution_count="4">
+<div id="ba37c20b" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"1. Removing the initial data gap (early 2016)..."</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove the period with insufficient data coverage</span></span>
@@ -727,7 +727,7 @@ dtype: int64
 <p><strong><em>Why use both sine and cosine components?</em></strong></p>
 <p>Using only one trigonometric function introduces ambiguity due to symmetry. For example, if only the sine component is used, midnight (<span class="math inline">\(\sin(0)=0\)</span>) and noon (<span class="math inline">\(\sin(\pi)=0\)</span>) would receive the same value, preventing the model from distinguishing between day and night. By combining the cosine component (<span class="math inline">\(X\)</span>-axis) and sine component (<span class="math inline">\(Y\)</span>-axis), each timestamp is uniquely represented in a two-dimensional periodic space. Consequently, the Euclidean distance between 23:00 and 01:00 is correctly interpreted as small by the neural network.</p>
 <p>The following code adds these temporal coordinates to the dataset:</p>
-<div id="271a96c3" class="cell" data-execution_count="5">
+<div id="f295a887" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -783,7 +783,7 @@ dtype: int64
 <p>This analysis provides valuable insights for feature selection before training the PyTorch model. Variables with limited predictive relevance may be removed to reduce noise and decrease the dimensionality of the input tensors. However, correlation alone does not fully capture the predictive value of a feature, especially in nonlinear time-dependent systems such as building thermal dynamics.</p>
 <p><strong>Code: Correlation Heatmap</strong></p>
 <p>The following visualization uses the <code>seaborn</code> library to generate a correlation heatmap, providing an overview of the relationships between the selected features and the energy consumption target.</p>
-<div id="1ac37cf3" class="cell" data-execution_count="6">
+<div id="74efd0ca" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -852,7 +852,7 @@ Génération de la Heatmap globale...</code></pre>
 <li><code>day_cos</code>: weekly temporal encoding component.</li>
 </ul>
 <p>The objective is to determine whether past values of these variables contain predictive information about future electricity consumption over a 24-hour horizon. This analysis helps identify delayed relationships that cannot be captured by a standard Pearson correlation computed at the same timestamp.</p>
-<div id="71875a88" class="cell" data-execution_count="7">
+<div id="3694def3" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1000,7 +1000,7 @@ dtype: float64</code></pre>
 <p>To predict the energy consumption at time <span class="math inline">\(t\)</span>, the model receives the previous 24 hours of system information:</p>
 <p>[ [X_{t-24}, X_{t-23}, …, X_{t-1}] ]</p>
 <p>Any sequence containing missing target values is discarded to ensure that the model is trained only on physically consistent observations.</p>
-<div id="88d36f5f" class="cell" data-execution_count="8">
+<div id="fee46f05" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> MinMaxScaler</span>
@@ -1137,7 +1137,7 @@ Testing X : (3824, 24, 10), y: (3824, 1)</code></pre>
 </ol>
 <p>The model parameters are optimized by minimizing the Mean Squared Error (MSE) loss, which is appropriate for this continuous regression problem. The Adam optimizer is selected due to its adaptive learning rate mechanism and its robustness for training deep neural networks.</p>
 <p>The following code implements the <code>ThermalLSTM</code> architecture and initializes the training configuration.</p>
-<div id="93caa317" class="cell" data-execution_count="9">
+<div id="f4075238" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch.nn <span class="im">as</span> nn</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch.optim <span class="im">as</span> optim</span>
@@ -1283,7 +1283,7 @@ ThermalLSTM(
 -&gt; Model ready for training.</code></pre>
 </div>
 </div>
-<div id="5543aec3" class="cell" data-execution_count="10">
+<div id="b66ff519" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torch.utils.data <span class="im">import</span> TensorDataset, DataLoader</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1325,7 +1325,7 @@ Encapsulation dans des DataLoader (Gestion des batchs)...
 -&gt; Model transfered to the target device : cpu</code></pre>
 </div>
 </div>
-<div id="018c5172" class="cell" data-execution_count="11">
+<div id="a8eb1af7" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torch.utils.data <span class="im">import</span> TensorDataset, DataLoader</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1371,7 +1371,7 @@ Creating DataLoaders...
 <p>After each epoch, the model is evaluated on the future unseen dataset separated by the natural sensor outage boundary. This chronological evaluation provides a realistic measure of the model’s generalization capability.</p></li>
 </ol>
 <p>The evolution of the training and evaluation losses is stored throughout the optimization process to monitor convergence and detect potential overfitting.</p>
-<div id="30b6e3d4" class="cell" data-execution_count="12">
+<div id="655d9c1a" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Configuring the training loop..."</span>)</span>
@@ -1450,23 +1450,23 @@ Creating DataLoaders...
 <span id="cb23-76"><a href="#cb23-76" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Best test MSE: </span><span class="sc">{</span>best_test_loss<span class="sc">:.6f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Configuring the training loop...
-Epoch [1/100] | Train Loss (MSE): 0.035639 | Test Loss (MSE): 0.026700
-Epoch [10/100] | Train Loss (MSE): 0.002706 | Test Loss (MSE): 0.004815
-Epoch [20/100] | Train Loss (MSE): 0.001246 | Test Loss (MSE): 0.002436
-Epoch [30/100] | Train Loss (MSE): 0.000808 | Test Loss (MSE): 0.001756
-Epoch [40/100] | Train Loss (MSE): 0.000706 | Test Loss (MSE): 0.001633
-Epoch [50/100] | Train Loss (MSE): 0.000651 | Test Loss (MSE): 0.001486
-Epoch [60/100] | Train Loss (MSE): 0.000640 | Test Loss (MSE): 0.001705
-Epoch [70/100] | Train Loss (MSE): 0.000586 | Test Loss (MSE): 0.001371
-Epoch [80/100] | Train Loss (MSE): 0.000582 | Test Loss (MSE): 0.001454
-Epoch [90/100] | Train Loss (MSE): 0.000572 | Test Loss (MSE): 0.001551
-Epoch [100/100] | Train Loss (MSE): 0.000559 | Test Loss (MSE): 0.001460
+Epoch [1/100] | Train Loss (MSE): 0.074397 | Test Loss (MSE): 0.047068
+Epoch [10/100] | Train Loss (MSE): 0.003276 | Test Loss (MSE): 0.008110
+Epoch [20/100] | Train Loss (MSE): 0.002428 | Test Loss (MSE): 0.004623
+Epoch [30/100] | Train Loss (MSE): 0.001639 | Test Loss (MSE): 0.002998
+Epoch [40/100] | Train Loss (MSE): 0.001008 | Test Loss (MSE): 0.002055
+Epoch [50/100] | Train Loss (MSE): 0.000752 | Test Loss (MSE): 0.001472
+Epoch [60/100] | Train Loss (MSE): 0.000641 | Test Loss (MSE): 0.001698
+Epoch [70/100] | Train Loss (MSE): 0.000594 | Test Loss (MSE): 0.001375
+Epoch [80/100] | Train Loss (MSE): 0.000577 | Test Loss (MSE): 0.001574
+Epoch [90/100] | Train Loss (MSE): 0.000558 | Test Loss (MSE): 0.001511
+Epoch [100/100] | Train Loss (MSE): 0.000542 | Test Loss (MSE): 0.001463
 
 --- Training completed successfully! ---
-Best test MSE: 0.001319</code></pre>
+Best test MSE: 0.001283</code></pre>
 </div>
 </div>
-<div id="8b76b61a" class="cell" data-execution_count="13">
+<div id="ab6aaea5" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"1. Génération des prédictions sur le jeu de test..."</span>)</span>
@@ -1510,7 +1510,7 @@ Best test MSE: 0.001319</code></pre>
 </div>
 </div>
 </div>
-<div id="028a2d61" class="cell" data-execution_count="14">
+<div id="97308501" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>plt.plot(train_losses, label<span class="op">=</span><span class="st">"Perte Entraînement (Train Loss)"</span>, color<span class="op">=</span><span class="st">'blue'</span>)</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>plt.plot(test_losses, label<span class="op">=</span><span class="st">"Perte Test (Test Loss)"</span>, color<span class="op">=</span><span class="st">'orange'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>)</span>
@@ -1524,12 +1524,12 @@ Best test MSE: 0.001319</code></pre>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="optitherm_files/figure-html/cell-15-output-1.png" width="953" height="471" class="figure-img"></p>
+<p><img src="optitherm_files/figure-html/cell-15-output-1.png" width="952" height="471" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
-<div id="212d6523" class="cell" data-execution_count="15">
+<div id="f1d868ff" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">6</span>))</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>plt.scatter(actuals_rescaled, predictions_rescaled, alpha<span class="op">=</span><span class="fl">0.3</span>, color<span class="op">=</span><span class="st">'purple'</span>, s<span class="op">=</span><span class="dv">10</span>, label<span class="op">=</span><span class="st">"Predictions"</span>)</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Ligne idéale y = x</span></span>

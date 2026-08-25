@@ -8,14 +8,12 @@
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   letter-spacing: -0.01em;
-  color: #2c3e50;
+  /* color: #2c3e50;*/
 }
 
 /* 2. Custom Styling for Code Blocks (Python / C++) */
 pre.sourceCode {
   border-radius: 8px;
-  border: 1px solid #e1e4e8;
-  background-color: #f8f9fa !important;
   box-shadow: inset 0 1px 2px rgba(0,0,0,0.02);
 }
 
@@ -64,7 +62,7 @@ td, th {
 /* 6. CV & Profile Section Enhancements */
 h2, h3 {
   font-weight: 700;
-  color: #1a252f;
+  /* color: #1a252f; */
 }
 
 /* Add a subtle fade-in transition for page elements */
