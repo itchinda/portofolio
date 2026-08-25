@@ -612,11 +612,11 @@ Epoch 20 | Train Loss: 0.0236 | Train Acc: 99.16% | Test Loss: 0.0225 | Test Acc
 <section id="decision-boundary-visualization" class="level2">
 <h2 class="anchored" data-anchor-id="decision-boundary-visualization">5. Decision Boundary Visualization</h2>
 <p>To verify that the network has successfully captured the geometry of the data, we will create a 2D mesh grid, ask the model to predict the class for each point, and plot the resulting decision boundaries.</p>
-<div id="4fa0586b" class="cell" data-execution_count="54">
+<div id="4fa0586b" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a mesh grid covering the data space</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>xx, yy <span class="op">=</span> np.meshgrid(</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    np.linspace(np.<span class="bu">min</span>(x_data[:, <span class="dv">0</span>]) <span class="op">-</span> <span class="fl">0.25</span>, np.<span class="bu">max</span>(x_data[:, <span class="dv">0</span>]) <span class="op">-</span> <span class="fl">0.25</span>, <span class="dv">500</span>),</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    np.linspace(np.<span class="bu">min</span>(x_data[:, <span class="dv">1</span>]) <span class="op">+</span> <span class="fl">0.25</span>, np.<span class="bu">max</span>(x_data[:, <span class="dv">1</span>]) <span class="op">+</span> <span class="fl">0.25</span>, <span class="dv">500</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    np.linspace(np.<span class="bu">min</span>(x_data[:, <span class="dv">0</span>]) <span class="op">-</span> <span class="fl">0.25</span>, np.<span class="bu">max</span>(x_data[:, <span class="dv">0</span>]) <span class="op">+</span> <span class="fl">0.25</span>, <span class="dv">500</span>),</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    np.linspace(np.<span class="bu">min</span>(x_data[:, <span class="dv">1</span>]) <span class="op">-</span> <span class="fl">0.25</span>, np.<span class="bu">max</span>(x_data[:, <span class="dv">1</span>]) <span class="op">+</span> <span class="fl">0.25</span>, <span class="dv">500</span>)</span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict across the entire grid</span></span>
