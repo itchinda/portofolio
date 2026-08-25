@@ -1,1 +1,78 @@
 /* css styles */
+
+/* ==========================================
+   PORTFOLIO CUSTOM STYLES
+   ========================================== */
+
+/* 1. Global Typography & Smooth Rendering */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  letter-spacing: -0.01em;
+  color: #2c3e50;
+}
+
+/* 2. Custom Styling for Code Blocks (Python / C++) */
+pre.sourceCode {
+  border-radius: 8px;
+  border: 1px solid #e1e4e8;
+  background-color: #f8f9fa !important;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.02);
+}
+
+code {
+  font-family: "Fira Code", Consolas, Monaco, "Andale Mono", monospace;
+  font-size: 0.9em;
+}
+
+/* 3. Sleek Styling for Callout / Note Boxes */
+.callout {
+  border-radius: 8px !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+
+/* 4. Project & Category Badges Styling */
+.quarto-listing-category, .badge {
+  border-radius: 12px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.quarto-listing-category:hover {
+  background-color: #2F4F4F !important; /* Matches your Slate Gray aesthetic */
+  color: white !important;
+}
+
+/* 5. Modern Table Styling */
+table {
+  width: 100%;
+  margin-bottom: 1rem;
+  border-collapse: collapse;
+}
+
+th {
+  background-color: #f1f3f5;
+  border-bottom: 2px solid #dee2e6;
+  font-weight: 600;
+}
+
+td, th {
+  padding: 0.75rem;
+  vertical-align: top;
+  border-top: 1px solid #dee2e6;
+}
+
+/* 6. CV & Profile Section Enhancements */
+h2, h3 {
+  font-weight: 700;
+  color: #1a252f;
+}
+
+/* Add a subtle fade-in transition for page elements */
+main {
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}

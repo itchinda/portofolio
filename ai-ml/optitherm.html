@@ -77,10 +77,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-5fd49111c67786fa9da7eec5f8b0b01d.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-9f5b926861a4788c0ac337eeae9eab8a.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-5fd49111c67786fa9da7eec5f8b0b01d.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-221fb94c3ec07aa7e68c2d5abc4fc18e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-15edbce69538c647d35688472b53b0b8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-e3d4a8a8b52053fb18459f3b50eeff28.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-15edbce69538c647d35688472b53b0b8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -142,7 +146,169 @@ window.Quarto = {
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-sidebar floating nav-fixed quarto-light">
+<body class="nav-sidebar floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -178,6 +344,7 @@ window.Quarto = {
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -255,6 +422,7 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">OptiTherm Project: Digital Twin and Energy-Efficient Predictive Control (Data-Driven MPC)</h1>
@@ -295,7 +463,7 @@ window.Quarto = {
 <section id="why-this-building" class="level4">
 <h4 class="anchored" data-anchor-id="why-this-building">Why this building?</h4>
 <p>Office buildings exhibit well-defined daily and weekly occupancy patterns, with low occupancy during nights and weekends. In addition, a building constructed in 1974 is likely to have significant thermal inertia and relatively poor insulation compared with modern standards. These characteristics make it an ideal candidate for a predictive AI-based control system, as substantial energy savings can be achieved by anticipating heating and cooling demands while maintaining occupant comfort.</p>
-<div id="029c3f0a" class="cell" data-execution_count="1">
+<div id="32394d1f" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the building metadata</span></span>
@@ -370,7 +538,7 @@ Name: count, dtype: int64
 </section>
 <section id="stage-1-data-engineering-and-consolidation-1" class="level2">
 <h2 class="anchored" data-anchor-id="stage-1-data-engineering-and-consolidation-1">Stage 1: Data Engineering and Consolidation</h2>
-<div id="316dec71" class="cell" data-execution_count="2">
+<div id="2670691a" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Parameters for the digital twin</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>building_id <span class="op">=</span> <span class="st">"Panther_office_Graham"</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>site_id <span class="op">=</span> <span class="st">"Panther"</span></span>
@@ -435,7 +603,7 @@ dtype: int64</code></pre>
 <section id="next-step" class="level4">
 <h4 class="anchored" data-anchor-id="next-step">Next Step</h4>
 <p>Before deciding whether to impute or discard these observations, a visual temporal analysis is required to identify the distribution and duration of the electricity meter outages.</p>
-<div id="72f5bec2" class="cell" data-execution_count="3">
+<div id="90e7880e" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"1. Cleaning exogenous variables (weather data)..."</span>)</span>
@@ -491,7 +659,7 @@ dtype: int64
 <p>Interestingly, the prolonged sensor outage observed during the summer of 2017 was retained and used as a natural temporal boundary between the training and testing datasets. This approach avoids arbitrary data splitting strategies and ensures a realistic evaluation scenario, where the model is trained on past observations and tested on future unseen conditions.</p>
 <p><strong>Methodological justification:</strong></p>
 <p>The thermal dynamics of a building are learned from temporal sequences using recurrent neural networks (RNN/LSTM) with sliding windows. Therefore, preserving the chronological structure of the data is essential. By using the sensor outage as a natural separation point, the model evaluation better reflects a real-world deployment scenario, where future energy consumption must be predicted based solely on historical information.</p>
-<div id="f1a98e91" class="cell" data-execution_count="4">
+<div id="d8761141" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"1. Removing the initial data gap (early 2016)..."</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove the period with insufficient data coverage</span></span>
@@ -559,7 +727,7 @@ dtype: int64
 <p><strong><em>Why use both sine and cosine components?</em></strong></p>
 <p>Using only one trigonometric function introduces ambiguity due to symmetry. For example, if only the sine component is used, midnight (<span class="math inline">\(\sin(0)=0\)</span>) and noon (<span class="math inline">\(\sin(\pi)=0\)</span>) would receive the same value, preventing the model from distinguishing between day and night. By combining the cosine component (<span class="math inline">\(X\)</span>-axis) and sine component (<span class="math inline">\(Y\)</span>-axis), each timestamp is uniquely represented in a two-dimensional periodic space. Consequently, the Euclidean distance between 23:00 and 01:00 is correctly interpreted as small by the neural network.</p>
 <p>The following code adds these temporal coordinates to the dataset:</p>
-<div id="b6c857b0" class="cell" data-execution_count="5">
+<div id="271a96c3" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -615,7 +783,7 @@ dtype: int64
 <p>This analysis provides valuable insights for feature selection before training the PyTorch model. Variables with limited predictive relevance may be removed to reduce noise and decrease the dimensionality of the input tensors. However, correlation alone does not fully capture the predictive value of a feature, especially in nonlinear time-dependent systems such as building thermal dynamics.</p>
 <p><strong>Code: Correlation Heatmap</strong></p>
 <p>The following visualization uses the <code>seaborn</code> library to generate a correlation heatmap, providing an overview of the relationships between the selected features and the energy consumption target.</p>
-<div id="8d14978d" class="cell" data-execution_count="6">
+<div id="1ac37cf3" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -684,7 +852,7 @@ Génération de la Heatmap globale...</code></pre>
 <li><code>day_cos</code>: weekly temporal encoding component.</li>
 </ul>
 <p>The objective is to determine whether past values of these variables contain predictive information about future electricity consumption over a 24-hour horizon. This analysis helps identify delayed relationships that cannot be captured by a standard Pearson correlation computed at the same timestamp.</p>
-<div id="7726323e" class="cell" data-execution_count="7">
+<div id="71875a88" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -832,7 +1000,7 @@ dtype: float64</code></pre>
 <p>To predict the energy consumption at time <span class="math inline">\(t\)</span>, the model receives the previous 24 hours of system information:</p>
 <p>[ [X_{t-24}, X_{t-23}, …, X_{t-1}] ]</p>
 <p>Any sequence containing missing target values is discarded to ensure that the model is trained only on physically consistent observations.</p>
-<div id="7be0a8b8" class="cell" data-execution_count="8">
+<div id="88d36f5f" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> MinMaxScaler</span>
@@ -969,7 +1137,7 @@ Testing X : (3824, 24, 10), y: (3824, 1)</code></pre>
 </ol>
 <p>The model parameters are optimized by minimizing the Mean Squared Error (MSE) loss, which is appropriate for this continuous regression problem. The Adam optimizer is selected due to its adaptive learning rate mechanism and its robustness for training deep neural networks.</p>
 <p>The following code implements the <code>ThermalLSTM</code> architecture and initializes the training configuration.</p>
-<div id="7c1803e8" class="cell" data-execution_count="9">
+<div id="93caa317" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch.nn <span class="im">as</span> nn</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch.optim <span class="im">as</span> optim</span>
@@ -1115,7 +1283,7 @@ ThermalLSTM(
 -&gt; Model ready for training.</code></pre>
 </div>
 </div>
-<div id="6453ccc4" class="cell" data-execution_count="10">
+<div id="5543aec3" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torch.utils.data <span class="im">import</span> TensorDataset, DataLoader</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1157,7 +1325,7 @@ Encapsulation dans des DataLoader (Gestion des batchs)...
 -&gt; Model transfered to the target device : cpu</code></pre>
 </div>
 </div>
-<div id="22a0f604" class="cell" data-execution_count="11">
+<div id="018c5172" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torch.utils.data <span class="im">import</span> TensorDataset, DataLoader</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1203,7 +1371,7 @@ Creating DataLoaders...
 <p>After each epoch, the model is evaluated on the future unseen dataset separated by the natural sensor outage boundary. This chronological evaluation provides a realistic measure of the model’s generalization capability.</p></li>
 </ol>
 <p>The evolution of the training and evaluation losses is stored throughout the optimization process to monitor convergence and detect potential overfitting.</p>
-<div id="79a33038" class="cell" data-execution_count="12">
+<div id="30b6e3d4" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Configuring the training loop..."</span>)</span>
@@ -1282,23 +1450,23 @@ Creating DataLoaders...
 <span id="cb23-76"><a href="#cb23-76" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Best test MSE: </span><span class="sc">{</span>best_test_loss<span class="sc">:.6f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Configuring the training loop...
-Epoch [1/100] | Train Loss (MSE): 0.073371 | Test Loss (MSE): 0.033860
-Epoch [10/100] | Train Loss (MSE): 0.003522 | Test Loss (MSE): 0.007225
-Epoch [20/100] | Train Loss (MSE): 0.002511 | Test Loss (MSE): 0.003691
-Epoch [30/100] | Train Loss (MSE): 0.002165 | Test Loss (MSE): 0.002660
-Epoch [40/100] | Train Loss (MSE): 0.001552 | Test Loss (MSE): 0.003033
-Epoch [50/100] | Train Loss (MSE): 0.001026 | Test Loss (MSE): 0.002758
-Epoch [60/100] | Train Loss (MSE): 0.000813 | Test Loss (MSE): 0.002954
-Epoch [70/100] | Train Loss (MSE): 0.000697 | Test Loss (MSE): 0.002359
-Epoch [80/100] | Train Loss (MSE): 0.000623 | Test Loss (MSE): 0.001986
-Epoch [90/100] | Train Loss (MSE): 0.000602 | Test Loss (MSE): 0.001757
-Epoch [100/100] | Train Loss (MSE): 0.000580 | Test Loss (MSE): 0.001663
+Epoch [1/100] | Train Loss (MSE): 0.035639 | Test Loss (MSE): 0.026700
+Epoch [10/100] | Train Loss (MSE): 0.002706 | Test Loss (MSE): 0.004815
+Epoch [20/100] | Train Loss (MSE): 0.001246 | Test Loss (MSE): 0.002436
+Epoch [30/100] | Train Loss (MSE): 0.000808 | Test Loss (MSE): 0.001756
+Epoch [40/100] | Train Loss (MSE): 0.000706 | Test Loss (MSE): 0.001633
+Epoch [50/100] | Train Loss (MSE): 0.000651 | Test Loss (MSE): 0.001486
+Epoch [60/100] | Train Loss (MSE): 0.000640 | Test Loss (MSE): 0.001705
+Epoch [70/100] | Train Loss (MSE): 0.000586 | Test Loss (MSE): 0.001371
+Epoch [80/100] | Train Loss (MSE): 0.000582 | Test Loss (MSE): 0.001454
+Epoch [90/100] | Train Loss (MSE): 0.000572 | Test Loss (MSE): 0.001551
+Epoch [100/100] | Train Loss (MSE): 0.000559 | Test Loss (MSE): 0.001460
 
 --- Training completed successfully! ---
-Best test MSE: 0.001641</code></pre>
+Best test MSE: 0.001319</code></pre>
 </div>
 </div>
-<div id="e98681d8" class="cell" data-execution_count="13">
+<div id="8b76b61a" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"1. Génération des prédictions sur le jeu de test..."</span>)</span>
@@ -1342,7 +1510,7 @@ Best test MSE: 0.001641</code></pre>
 </div>
 </div>
 </div>
-<div id="904aebc0" class="cell" data-execution_count="14">
+<div id="028a2d61" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>plt.plot(train_losses, label<span class="op">=</span><span class="st">"Perte Entraînement (Train Loss)"</span>, color<span class="op">=</span><span class="st">'blue'</span>)</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>plt.plot(test_losses, label<span class="op">=</span><span class="st">"Perte Test (Test Loss)"</span>, color<span class="op">=</span><span class="st">'orange'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>)</span>
@@ -1356,12 +1524,12 @@ Best test MSE: 0.001641</code></pre>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="optitherm_files/figure-html/cell-15-output-1.png" width="952" height="471" class="figure-img"></p>
+<p><img src="optitherm_files/figure-html/cell-15-output-1.png" width="953" height="471" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
-<div id="6d228738" class="cell" data-execution_count="15">
+<div id="212d6523" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">6</span>))</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>plt.scatter(actuals_rescaled, predictions_rescaled, alpha<span class="op">=</span><span class="fl">0.3</span>, color<span class="op">=</span><span class="st">'purple'</span>, s<span class="op">=</span><span class="dv">10</span>, label<span class="op">=</span><span class="st">"Predictions"</span>)</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Ligne idéale y = x</span></span>
@@ -1391,6 +1559,19 @@ Best test MSE: 0.001641</code></pre>
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
     const anchorJS = new window.AnchorJS();
     anchorJS.options = {
