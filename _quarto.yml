@@ -42,5 +42,7 @@ format:
     theme:
       light: [flatly, theme-light.scss]
       dark: [darkly, theme-dark.scss]
+    grid:
+      body-width: 1100px
     css: styles.css
     toc: true
