@@ -5,7 +5,8 @@ description: "A custom Deep Learning framework built entirely from scratch using
 
 ## Overview
 
-Modern frameworks like PyTorch and TensorFlow abstract away the complex calculus and linear algebra required to train neural networks. To deeply understand the mathematics of backpropagation and optimization, I built a custom Deep Learning framework completely from scratch using only Python and `numpy`.
+Modern frameworks like PyTorch and TensorFlow abstract away the complex calculus and linear algebra required to train neural networks. To deeply understand the mathematics of backpropagation and optimization, 
+I built a custom Deep Learning framework completely from scratch using only Python and `numpy`.
 
 This engine supports dynamic graph execution (the "bucket brigade" automatic differentiation), custom activation layers, and various loss functions.
 
@@ -19,6 +20,8 @@ The framework is built using a strict Object-Oriented paradigm, ensuring modular
 *   **`Loss Functions`:** Implements `MSELoss`, `BinaryCrossEntropyLoss`, and `CrossEntropyLoss` (with numerically stable internal Softmax).
 *   **`Optimizers`:** Includes standard SGD and a custom implementation of the `Adam` optimizer with momentum and RMSprop mechanics.
 *   **`Sequential` API:** A user-friendly wrapper to stack layers and manage the training loop cleanly.
+
+I refer you to the project [GitHub page](https://github.com/itchinda/ml-engine-from-scratch) for more details.
 
 ## Live Examples
 
