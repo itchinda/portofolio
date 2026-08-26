@@ -49,3 +49,4 @@ format:
       body-width: 1100px
     css: styles.css
     toc: true
+    include-in-header: google-verify.html
