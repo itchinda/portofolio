@@ -1,6 +1,6 @@
 ---
 title: "Ismaël Tchinda Ngueyong, Ph.D."
-description: "Applied Mathematician & Scientific Computing Developer"
+description: "Ph.D. in Applied Mathematics | AI & Scientific Computing Developer"
 about:
   template: solana
   links:
@@ -10,6 +10,9 @@ about:
     - icon: mortarboard-fill
       text: Google Scholar
       href: https://scholar.google.com/citations?user=0BtIIxcAAAAJ
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/itchinda
 ---
 
 ## Welcome to My Portfolio

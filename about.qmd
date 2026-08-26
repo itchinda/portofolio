@@ -1,5 +1,27 @@
 ---
-title: "About"
+title: "About Me"
 ---
 
-About this site
+### Hi, I'm Ismaël Tchinda Ngueyong
+
+I am an applied mathematician and R&D engineer who specializes in translating complex physical phenomena into high-performance, data-driven software. I build systems that live at the intersection of rigorous mathematical theory, scientific computing, and modern artificial intelligence.
+
+### Bridging Theory and Production
+
+My foundational background is rooted in physics, with early graduate studies at the African Institute for Mathematical Sciences (AIMS) and Université Paris-Saclay. I transitioned into numerical analysis, culminating in a Ph.D. and a postdoctoral fellowship in mathematical modeling at Université Laval. 
+
+While I love the rigor of academic research, my true passion lies in building practical, scalable tools for industry. I continuously expand my toolkit to solve dynamic business and engineering challenges, integrating formal coursework in data processing and financial engineering at ÉTS Montréal into my modeling workflows.
+
+### My Engineering Toolkit
+
+I approach software architecture with an underlying focus on calculus, optimization, and linear algebra. My core technical domains include:
+
+*   **High-Performance Scientific Computing:** Designing custom, scalable C++ libraries (like `CFEM++`) for multiphysics finite element simulations, leveraging tools like PETSc and OpenMP.
+*   **Algorithm & Software Development:** Engineering open-source numerical solvers, such as the `PyOdys` Python package for ordinary differential equations.
+*   **Hybrid AI Systems:** Combining classical computational fluid dynamics (including CutFEM and level-set methods) with Deep Learning frameworks like PyTorch to construct predictive models, digital twins, and custom machine learning engines from scratch.
+
+### Beyond the Code
+
+Writing clean C++ or optimizing a neural network backpropagation algorithm is only half the job; the other half is communication. Through my experience lecturing at institutions like Cégep de La Pocatière and Collège du Soleil, and acting as a technical consultant, I have honed the ability to break down highly dense mathematical concepts into clear, actionable insights for diverse teams. I am fully bilingual, collaborating seamlessly in both French and English.
+
+---
