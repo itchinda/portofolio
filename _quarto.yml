@@ -3,7 +3,8 @@ project:
 
 website:
   title: "Ismaël Tchinda Ngueyong | Portfolio"
-  description: "Scientific Computing Developer"
+  site-url: "https://itchinda.github.io/portfolio"
+  description: "Portfolio of Ismaël Tchinda Ngueyong, Applied Mathematician and R&D Engineer specializing in Scientific Computing and Deep Learning."
   
   navbar:
     background: primary
