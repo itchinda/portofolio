@@ -1,1 +1,1 @@
-Sitemap: https://itchinda.github.io/portfolio/sitemap.xml
+Sitemap: https://itchinda.github.io/sitemap.xml
