@@ -312,20 +312,20 @@ The following visualization uses the `seaborn` library to generate a correlation
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-print("Calcul de la matrice de corrélation de Pearson...")
-# On calcule la corrélation de toutes les variables avec toutes les autres
+print("Calculating the Pearson correlation matrix...")
+# Compute the correlation of all variables with each other
 corr_matrix = df_merged.corr()
 
-# On isole spécifiquement les corrélations par rapport à notre cible
+# Isolate specifically the correlations with respect to our target variable
 target_corr = corr_matrix[['meter_reading']].sort_values(by='meter_reading', ascending=False)
-print("\n--- Corrélations avec la consommation électrique ---")
+print("\n--- Correlations with electricity consumption ---")
 print(target_corr)
 
-print("\nGénération de la Heatmap globale...")
+print("\nGenerating the global Heatmap...")
 plt.figure(figsize=(10, 8))
-# Le paramètre cmap='coolwarm' permet de bien contraster les corrélations positives (rouge) et négatives (bleu)
+# The cmap='coolwarm' parameter helps contrast positive (red) and negative (blue) correlations well
 sns.heatmap(corr_matrix, annot=True, fmt=".2f", cmap="coolwarm", vmin=-1, vmax=1, square=True)
-plt.title("Matrice de Corrélation des Variables du Bâtiment Graham")
+plt.title("Correlation Matrix of Graham Building Variables")
 plt.tight_layout()
 plt.show()
 ```
@@ -484,7 +484,8 @@ print("1. Definition of the model feature space...")
 
 # Features removed after data quality and correlation analysis
 cols_to_drop = [
-    'precipDepth1HR'
+    'precipDepth1HR',
+    #'seaLvlPressure'
 ]
 
 df_model = df_merged.drop(columns=cols_to_drop).copy()
@@ -519,7 +520,6 @@ else:
 
 print(f"-> Training samples: {len(df_train)} hours")
 print(f"-> Testing samples : {len(df_test)} hours")
-
 
 print("\n3. Min-Max normalization (training data only)...")
 
@@ -569,7 +569,6 @@ X_test_tensor, y_test_tensor = create_sequences(
     y_test_scaled,
     SEQUENCE_LENGTH
 )
-
 
 print("\n--- Tensor Summary ---")
 print(f"Training X: {X_train_tensor.shape}, y: {y_train_tensor.shape}")
@@ -623,14 +622,6 @@ class ThermalLSTM(nn.Module):
 
         # Projection from hidden representation to energy consumption
         self.fc = nn.Linear(in_features=hidden_size, out_features=1)
-
-        # self.fc = nn.Sequential(
-        #     nn.Linear(in_features=hidden_size, out_features=hidden_size),
-        #     nn.Tanh(),                           # Non-linearity
-    
-        #     nn.Linear(in_features=hidden_size, out_features=1)
-        # )
-
 
     def forward(self, x):
         """
@@ -790,7 +781,7 @@ for epoch in range(EPOCHS):
 
     if (epoch + 1) % PRINT_FREQ == 0 or epoch == 0:
 
-        print( f"Epoch [{epoch+1}/{EPOCHS}] "
+        print( f"Epoch [{epoch+1:3d}/{EPOCHS}] "
                f"| Train Loss (MSE): {epoch_train_loss:.6f} "
                f"| Test Loss (MSE): {epoch_test_loss:.6f}"
         )
@@ -843,7 +834,6 @@ plt.legend()
 plt.grid(True, alpha=0.3)
 
 # Automatically format the x-axis dates to look clean and prevent overlapping
-#plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
 plt.gcf().autofmt_xdate()
 
 plt.tight_layout()
