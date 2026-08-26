@@ -447,10 +447,10 @@ window.Quarto = {
 </header>
 
 
-<p>This notebook demonstrates how to use the <code>ml-engine-from-scratch</code> framework to solve a complex, multi-output regression task.</p>
+<p>This notebook demonstrates how to use the <a href="https://github.com/itchinda/ml-engine-from-scratch"><code>ml-engine-from-scratch</code></a> framework to solve a complex, multi-output regression task.</p>
 <p>Unlike classification tasks where the output is a discrete label, regression requires the network to predict continuous values. We will task our Multi-Layer Perceptron (MLP) with simultaneously learning two distinct continuous functions from a single input <span class="math inline">\(x\)</span>: 1. A smooth, low-frequency sine wave. 2. A highly complex, multi-frequency wave.</p>
 <p>This serves as a practical demonstration of the <strong>Universal Approximation Theorem</strong>, showing how deep networks can map 1D inputs to multi-dimensional continuous spaces.</p>
-<div id="150ee4dd" class="cell" data-execution_count="46">
+<div id="150ee4dd" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> ml_framework <span class="im">as</span> ml</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -468,7 +468,7 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="data-generation-and-initial-visualization">1. Data Generation and Initial Visualization</h2>
 <p>We will generate 10,000 random scalar inputs <span class="math inline">\(x \in [-1, 1]\)</span>. From these inputs, we generate two targets with added Gaussian noise: * <span class="math inline">\(y_1 = \sin(\pi x) + \epsilon\)</span> * <span class="math inline">\(y_2 = \sin(2x) + 0.5\cos(10x) + 0.25\sin(25x) + \epsilon\)</span></p>
 <p>Neural networks typically perform best when target variables are scaled. We will normalize both <span class="math inline">\(y_1\)</span> and <span class="math inline">\(y_2\)</span> to the <span class="math inline">\([0, 1]\)</span> range before splitting the dataset.</p>
-<div id="16490b09" class="cell" data-execution_count="47">
+<div id="16490b09" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate inputs</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>x_data <span class="op">=</span> X_MIN <span class="op">+</span> (X_MAX <span class="op">-</span> X_MIN) <span class="op">*</span> rng.random((N_SAMPLES, N_IN_FEATURES))</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -519,7 +519,7 @@ Test shapes: X=(2000, 1), y=(2000, 2)</code></pre>
 <h2 class="anchored" data-anchor-id="neural-network-architecture">2. Neural Network Architecture</h2>
 <p>Regression of highly non-linear, high-frequency functions requires sufficient depth and width.</p>
 <p><em>Engineering Note:</em> We are using the <strong>Hyperbolic Tangent (<code>Tanh</code>)</strong> activation function here instead of <code>ReLU</code>. <code>Tanh</code> provides smooth, differentiable, and bounded non-linearities <span class="math inline">\([-1, 1]\)</span>, which often yield much smoother curve approximations for continuous mathematical functions compared to the sharp “corners” created by <code>ReLU</code> networks.</p>
-<div id="7030945f" class="cell" data-execution_count="48">
+<div id="7030945f" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Model Architecture</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> ml.Sequential([</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    ml.LinearLayer(in_features<span class="op">=</span><span class="dv">1</span>, out_features<span class="op">=</span><span class="dv">32</span>, rng<span class="op">=</span>rng),</span>
@@ -557,7 +557,7 @@ Sequential(
 <section id="model-training" class="level2">
 <h2 class="anchored" data-anchor-id="model-training">3. Model Training</h2>
 <p>We train the model for 1000 epochs. Because we are optimizing a continuous output, we track the Mean Squared Error (MSE). We shuffle the data at the start of every epoch to ensure stochasticity in our mini-batches.</p>
-<div id="b02b2f55" class="cell">
+<div id="b02b2f55" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>EPOCHS <span class="op">=</span><span class="dv">1000</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>TEST_FREQ <span class="op">=</span> <span class="dv">10</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>PRINT_FREQ <span class="op">=</span> <span class="dv">100</span></span>
@@ -606,109 +606,18 @@ Sequential(
 <span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>        test_pred <span class="op">=</span> model(X_test)</span>
 <span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>        test_loss <span class="op">=</span> loss_fn(y_predicted<span class="op">=</span>test_pred, y_expected<span class="op">=</span>y_test)</span>
 <span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>        val_loss_values.append(test_loss)</span>
-<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> epoch <span class="op">%</span> PRINT_FREQ <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span>  (epoch <span class="op">+</span> <span class="dv">1</span>) <span class="op">%</span> PRINT_FREQ <span class="op">==</span> <span class="dv">0</span>:</span>
 <span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"Epoch </span><span class="sc">{</span>epoch <span class="op">+</span> <span class="dv">1</span><span class="sc">:4d}</span><span class="ss">/</span><span class="sc">{</span>EPOCHS<span class="sc">}</span><span class="ss"> | Train MSE: </span><span class="sc">{</span>train_loss<span class="sc">:.6f}</span><span class="ss"> | Val MSE: </span><span class="sc">{</span>test_loss<span class="sc">:.6f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Epoch    1/1000 | Train MSE: 0.012770 | Val MSE: 0.013132
-Epoch   10/1000 | Train MSE: 0.005595 | Val MSE: 0.005732
-Epoch   20/1000 | Train MSE: 0.004032 | Val MSE: 0.004147
-Epoch   30/1000 | Train MSE: 0.003308 | Val MSE: 0.003330
-Epoch   40/1000 | Train MSE: 0.002694 | Val MSE: 0.002740
-Epoch   50/1000 | Train MSE: 0.002399 | Val MSE: 0.002428
-Epoch   60/1000 | Train MSE: 0.002532 | Val MSE: 0.002549
-Epoch   70/1000 | Train MSE: 0.002183 | Val MSE: 0.002216
-Epoch   80/1000 | Train MSE: 0.002306 | Val MSE: 0.002348
-Epoch   90/1000 | Train MSE: 0.002217 | Val MSE: 0.002260
-Epoch  100/1000 | Train MSE: 0.002038 | Val MSE: 0.002071
-Epoch  110/1000 | Train MSE: 0.001725 | Val MSE: 0.001763
-Epoch  120/1000 | Train MSE: 0.001689 | Val MSE: 0.001721
-Epoch  130/1000 | Train MSE: 0.001787 | Val MSE: 0.001836
-Epoch  140/1000 | Train MSE: 0.001477 | Val MSE: 0.001545
-Epoch  150/1000 | Train MSE: 0.001592 | Val MSE: 0.001674
-Epoch  160/1000 | Train MSE: 0.001364 | Val MSE: 0.001430
-Epoch  170/1000 | Train MSE: 0.001342 | Val MSE: 0.001414
-Epoch  180/1000 | Train MSE: 0.001318 | Val MSE: 0.001368
-Epoch  190/1000 | Train MSE: 0.001267 | Val MSE: 0.001330
+<pre><code>Epoch  100/1000 | Train MSE: 0.002038 | Val MSE: 0.002071
 Epoch  200/1000 | Train MSE: 0.001329 | Val MSE: 0.001404
-Epoch  210/1000 | Train MSE: 0.001270 | Val MSE: 0.001325
-Epoch  220/1000 | Train MSE: 0.001260 | Val MSE: 0.001303
-Epoch  230/1000 | Train MSE: 0.001285 | Val MSE: 0.001345
-Epoch  240/1000 | Train MSE: 0.001311 | Val MSE: 0.001368
-Epoch  250/1000 | Train MSE: 0.001240 | Val MSE: 0.001293
-Epoch  260/1000 | Train MSE: 0.001248 | Val MSE: 0.001269
-Epoch  270/1000 | Train MSE: 0.001282 | Val MSE: 0.001356
-Epoch  280/1000 | Train MSE: 0.001306 | Val MSE: 0.001347
-Epoch  290/1000 | Train MSE: 0.001228 | Val MSE: 0.001289
 Epoch  300/1000 | Train MSE: 0.001210 | Val MSE: 0.001260
-Epoch  310/1000 | Train MSE: 0.001223 | Val MSE: 0.001277
-Epoch  320/1000 | Train MSE: 0.001235 | Val MSE: 0.001305
-Epoch  330/1000 | Train MSE: 0.001170 | Val MSE: 0.001215
-Epoch  340/1000 | Train MSE: 0.001179 | Val MSE: 0.001224
-Epoch  350/1000 | Train MSE: 0.001195 | Val MSE: 0.001255
-Epoch  360/1000 | Train MSE: 0.001151 | Val MSE: 0.001193
-Epoch  370/1000 | Train MSE: 0.001174 | Val MSE: 0.001224
-Epoch  380/1000 | Train MSE: 0.001209 | Val MSE: 0.001256
-Epoch  390/1000 | Train MSE: 0.001178 | Val MSE: 0.001220
 Epoch  400/1000 | Train MSE: 0.001159 | Val MSE: 0.001203
-Epoch  410/1000 | Train MSE: 0.001139 | Val MSE: 0.001177
-Epoch  420/1000 | Train MSE: 0.001198 | Val MSE: 0.001233
-Epoch  430/1000 | Train MSE: 0.001284 | Val MSE: 0.001322
-Epoch  440/1000 | Train MSE: 0.001160 | Val MSE: 0.001199
-Epoch  450/1000 | Train MSE: 0.001256 | Val MSE: 0.001292
-Epoch  460/1000 | Train MSE: 0.001174 | Val MSE: 0.001218
-Epoch  470/1000 | Train MSE: 0.001122 | Val MSE: 0.001162
-Epoch  480/1000 | Train MSE: 0.001226 | Val MSE: 0.001264
-Epoch  490/1000 | Train MSE: 0.001235 | Val MSE: 0.001274
 Epoch  500/1000 | Train MSE: 0.001143 | Val MSE: 0.001186
-Epoch  510/1000 | Train MSE: 0.001158 | Val MSE: 0.001191
-Epoch  520/1000 | Train MSE: 0.001134 | Val MSE: 0.001174
-Epoch  530/1000 | Train MSE: 0.001161 | Val MSE: 0.001213
-Epoch  540/1000 | Train MSE: 0.001150 | Val MSE: 0.001204
-Epoch  550/1000 | Train MSE: 0.001196 | Val MSE: 0.001244
-Epoch  560/1000 | Train MSE: 0.001133 | Val MSE: 0.001183
-Epoch  570/1000 | Train MSE: 0.001146 | Val MSE: 0.001203
-Epoch  580/1000 | Train MSE: 0.001179 | Val MSE: 0.001236
-Epoch  590/1000 | Train MSE: 0.001166 | Val MSE: 0.001198
 Epoch  600/1000 | Train MSE: 0.001120 | Val MSE: 0.001179
-Epoch  610/1000 | Train MSE: 0.001111 | Val MSE: 0.001156
-Epoch  620/1000 | Train MSE: 0.001167 | Val MSE: 0.001218
-Epoch  630/1000 | Train MSE: 0.001151 | Val MSE: 0.001206
-Epoch  640/1000 | Train MSE: 0.001151 | Val MSE: 0.001202
-Epoch  650/1000 | Train MSE: 0.001187 | Val MSE: 0.001247
-Epoch  660/1000 | Train MSE: 0.001200 | Val MSE: 0.001274
-Epoch  670/1000 | Train MSE: 0.001170 | Val MSE: 0.001212
-Epoch  680/1000 | Train MSE: 0.001137 | Val MSE: 0.001188
-Epoch  690/1000 | Train MSE: 0.001189 | Val MSE: 0.001246
 Epoch  700/1000 | Train MSE: 0.001200 | Val MSE: 0.001263
-Epoch  710/1000 | Train MSE: 0.001186 | Val MSE: 0.001223
-Epoch  720/1000 | Train MSE: 0.001160 | Val MSE: 0.001201
-Epoch  730/1000 | Train MSE: 0.001138 | Val MSE: 0.001203
-Epoch  740/1000 | Train MSE: 0.001126 | Val MSE: 0.001177
-Epoch  750/1000 | Train MSE: 0.001182 | Val MSE: 0.001230
-Epoch  760/1000 | Train MSE: 0.001109 | Val MSE: 0.001162
-Epoch  770/1000 | Train MSE: 0.001114 | Val MSE: 0.001161
-Epoch  780/1000 | Train MSE: 0.001125 | Val MSE: 0.001178
-Epoch  790/1000 | Train MSE: 0.001213 | Val MSE: 0.001273
 Epoch  800/1000 | Train MSE: 0.001154 | Val MSE: 0.001194
-Epoch  810/1000 | Train MSE: 0.001180 | Val MSE: 0.001254
-Epoch  820/1000 | Train MSE: 0.001245 | Val MSE: 0.001299
-Epoch  830/1000 | Train MSE: 0.001194 | Val MSE: 0.001238
-Epoch  840/1000 | Train MSE: 0.001122 | Val MSE: 0.001182
-Epoch  850/1000 | Train MSE: 0.001191 | Val MSE: 0.001240
-Epoch  860/1000 | Train MSE: 0.001170 | Val MSE: 0.001229
-Epoch  870/1000 | Train MSE: 0.001115 | Val MSE: 0.001162
-Epoch  880/1000 | Train MSE: 0.001174 | Val MSE: 0.001234
-Epoch  890/1000 | Train MSE: 0.001161 | Val MSE: 0.001207
 Epoch  900/1000 | Train MSE: 0.001156 | Val MSE: 0.001206
-Epoch  910/1000 | Train MSE: 0.001167 | Val MSE: 0.001222
-Epoch  920/1000 | Train MSE: 0.001112 | Val MSE: 0.001167
-Epoch  930/1000 | Train MSE: 0.001116 | Val MSE: 0.001157
-Epoch  940/1000 | Train MSE: 0.001135 | Val MSE: 0.001191
-Epoch  950/1000 | Train MSE: 0.001219 | Val MSE: 0.001287
-Epoch  960/1000 | Train MSE: 0.001150 | Val MSE: 0.001195
-Epoch  970/1000 | Train MSE: 0.001174 | Val MSE: 0.001206
-Epoch  980/1000 | Train MSE: 0.001158 | Val MSE: 0.001211
-Epoch  990/1000 | Train MSE: 0.001167 | Val MSE: 0.001230
 Epoch 1000/1000 | Train MSE: 0.001184 | Val MSE: 0.001221</code></pre>
 </div>
 </div>
@@ -716,7 +625,7 @@ Epoch 1000/1000 | Train MSE: 0.001184 | Val MSE: 0.001221</code></pre>
 <section id="learning-curves-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="learning-curves-analysis">4. Learning Curves Analysis</h2>
 <p>Because MSE can drop rapidly in the first few epochs and then decrease exponentially slowly, it is often best visualized on a logarithmic scale (<code>semilogy</code>). This allows us to observe the fine-tuning behavior in the later epochs.</p>
-<div id="40cc1113" class="cell" data-execution_count="50">
+<div id="40cc1113" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Training and Validation Loss (MSE)'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>plt.semilogy(TEST_FREQ<span class="op">*</span>np.arange(<span class="bu">len</span>(loss_values)), loss_values, <span class="st">'b-'</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>, label<span class="op">=</span><span class="st">'Train Loss'</span>)</span>
@@ -738,7 +647,7 @@ Epoch 1000/1000 | Train MSE: 0.001184 | Val MSE: 0.001221</code></pre>
 <section id="regression-curve-visualization" class="level2">
 <h2 class="anchored" data-anchor-id="regression-curve-visualization">5. Regression Curve Visualization</h2>
 <p>To evaluate our model visually, we will generate a perfectly spaced array of points across our input domain and ask the model to predict the outputs. We can then overlay this predicted curve on top of our noisy training and testing data.</p>
-<div id="ed01964c" class="cell" data-execution_count="51">
+<div id="ed01964c" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate continuous inputs for a smooth evaluation curve</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>model.<span class="bu">eval</span>()</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>X_eval <span class="op">=</span> np.linspace(X_MIN, X_MAX, <span class="dv">500</span>).reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
@@ -785,7 +694,7 @@ Epoch 1000/1000 | Train MSE: 0.001184 | Val MSE: 0.001221</code></pre>
 <p>We will save our trained model, instantiate a completely fresh, untrained architecture, and load the saved weights. Finally, we will plot the predictions of both models to verify they match perfectly.</p>
 <section id="save-the-trained-model" class="level3">
 <h3 class="anchored" data-anchor-id="save-the-trained-model">Save the Trained Model</h3>
-<div id="f6a05544" class="cell" data-execution_count="52">
+<div id="f6a05544" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the trained model</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>save_path <span class="op">=</span> <span class="st">"regression_model.pth"</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>model.save(filepath<span class="op">=</span>save_path)</span>
@@ -798,7 +707,7 @@ Model successfully saved to regression_model.pth</code></pre>
 </section>
 <section id="load-the-trained-model" class="level3">
 <h3 class="anchored" data-anchor-id="load-the-trained-model">Load the Trained Model</h3>
-<div id="47af9437" class="cell" data-execution_count="53">
+<div id="47af9437" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Instantiate a fresh, untrained model with the same architecture</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>loaded_model <span class="op">=</span> ml.Sequential([</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    ml.LinearLayer(in_features<span class="op">=</span><span class="dv">1</span>, out_features<span class="op">=</span><span class="dv">32</span>, rng<span class="op">=</span>rng),</span>
