@@ -1,8 +1,11 @@
 ---
-title: "Ismaël Tchinda Ngueyong, Ph.D."
-description: "Ph.D. in Applied Mathematics | AI & Scientific Computing Developer"
+title: "Ismaël T. Ngueyong, Ph.D."
+description: "Applied Mathematician | AI & Scientific Computing Developer"
+image: "photo_profile.jpeg"
 about:
-  template: solana
+  template: trestles
+  id: hero-heading
+  image-shape: rounded
   links:
     - icon: github
       text: GitHub
@@ -15,11 +18,13 @@ about:
       href: https://www.linkedin.com/in/itchinda
 ---
 
+:::{#hero-heading}
 ## Welcome to My Portfolio
 
 Hello! I am an applied mathematician and researcher specializing in **scientific computing, numerical analysis, and machine learning**. My work focuses on bridging rigorous mathematical modeling with high-performance software architecture to solve complex multiphysics and data-driven problems.
 
 I hold a Ph.D. in Applied Mathematics from Université Laval and have extensive experience developing robust simulation environments, numerical solvers, and machine learning pipelines.
+:::
 
 ---
 
