@@ -22,6 +22,6 @@ I approach software architecture with an underlying focus on calculus, optimizat
 
 ### Beyond the Code
 
-Writing clean C++ or optimizing a neural network backpropagation algorithm is only half the job; the other half is communication. Through my experience lecturing at institutions like Cégep de La Pocatière and Collège du Soleil, and acting as a technical consultant, I have honed the ability to break down highly dense mathematical concepts into clear, actionable insights for diverse teams. I am fully bilingual, collaborating seamlessly in both French and English.
+Writing clean C++ or optimizing a neural network backpropagation algorithm is only half the job; the other half is communication. Through my experience lecturing at institutions like Cégep de La Pocatière, and acting as a technical consultant, I have honed the ability to break down highly dense mathematical concepts into clear, actionable insights for diverse teams. I am fully bilingual, collaborating seamlessly in both French and English.
 
 ---
