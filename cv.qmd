@@ -8,12 +8,12 @@ format:
 
 <div class="text-center" style="text-align: center; margin-bottom: 2rem;">
   <h2>Ismaël Tchinda Ngueyong, Ph.D.</h2>
-  <p><strong>Applied Mathematician | AI & Scientific Computing Developer</strong></p>
+  <p><strong>Scientific Computing & AI Engineer | Applied Mathematics</strong></p>
   <p>
     Québec, QC, Canada
   </p>
   <p>
-    <a href="https://https://scholar.google.com/citations?user=0BtIIxcAAAAJ" target="_blank"><strong>Google Scholar</strong></a> | 
+    <a href="https://scholar.google.com/citations?user=0BtIIxcAAAAJ" target="_blank"><strong>Google Scholar</strong></a> | 
     <a href="https://github.com/itchinda" target="_blank"><strong>GitHub</strong></a> |
     <a href="https://www.linkedin.com/in/itchinda" target="_blank"><strong>LinkedIn</strong></a>
   </p>

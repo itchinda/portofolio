@@ -1,6 +1,6 @@
 ---
 title: "Ismaël T. Ngueyong, Ph.D."
-description: "Applied Mathematician | AI & Scientific Computing Developer"
+description: "Scientific Computing & AI Engineer | Applied Mathematics"
 image: "photo_profile.jpeg"
 about:
   template: trestles

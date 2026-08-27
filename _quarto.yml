@@ -5,7 +5,20 @@ website:
   title: "Ismaël Tchinda Ngueyong"
   site-url: "https://itchinda.github.io"
   description: "Portfolio of Ismaël Tchinda Ngueyong, Applied Mathematician and R&D Engineer specializing in Scientific Computing and Deep Learning."
-  
+  page-footer:
+    background: light #"#2C3E50"  # This gives a nice, sleek dark background. You can also use "light", "primary", or a hex code like "#2C3E50"
+    center: 
+      - "Interested in scientific computing, AI, numerical simulation, or computational engineering?"
+      - icon: github
+        href: https://github.com/itchinda
+      - icon: linkedin
+        href: https://www.linkedin.com/in/itchinda/
+      - icon: mortarboard-fill # Uses a graduation cap icon for Google Scholar
+        #text: Google Scholar
+        href: https://scholar.google.com/citations?user=0BtIIxcAAAAJ
+      - icon: envelope
+        href: mailto:ismael.tchinda-ngueyong.1@ulaval.ca
+
   navbar:
     background: primary
     left:
